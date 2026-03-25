@@ -1,0 +1,228 @@
+/* ─────────────────────────────────────────
+   Alex Morgan — QA Engineer
+   style.css
+───────────────────────────────────────── */
+
+/* ── Tokens ── */
+:root {
+  --orange: #eb4910;
+  --bg:     #f8f5f0;
+  --text:   #1c1814;
+  --muted:  #9a8f85;
+  --rule:   #e0d9d0;
+  --display: 'Barlow', sans-serif;
+  --sans:    'Geist', sans-serif;
+}
+
+/* ── Reset ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Base ── */
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Main ── */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 2rem 4rem;
+  gap: 5rem;
+}
+
+/* ── Intro ── */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: center;
+  max-width: 780px;
+  width: 100%;
+  animation: fadeUp 0.7s ease both;
+}
+
+.intro-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.1rem;
+}
+
+.intro-name {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 4.5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.0;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+.intro-name em { font-style: italic; color: var(--orange); }
+
+.intro-bio {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 380px;
+}
+
+/* ── Intro right column — nav + photo stacked ── */
+.intro-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+/* ── Nav ── */
+nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+nav a {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+nav a:hover           { color: var(--orange); }
+nav a.highlight       { color: var(--text); border-bottom: 1.5px solid var(--orange); padding-bottom: 1px; }
+nav a.highlight:hover { color: var(--orange); }
+
+/* ── Photo ── */
+.photo-frame {
+  width: 200px;
+  height: 240px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e0d9cf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* photo-frame when used as an <img> tag */
+img.photo-frame {
+  display: block;
+  object-fit: cover;
+}
+
+/* Placeholder — remove once a real photo is added */
+.photo-initials {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  letter-spacing: -0.01em;
+}
+.photo-hint {
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 12px;
+  line-height: 1.5;
+}
+
+/* ── Skills ── */
+.skills-block {
+  max-width: 780px;
+  width: 100%;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.skills-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--rule);
+  margin-bottom: 2rem;
+}
+
+.skills-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill {
+  background: var(--bg);
+  padding: 1.1rem 1.2rem;
+  transition: background 0.15s;
+}
+.skill:hover { background: #fff; }
+
+.skill-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.skill-detail {
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+/* ── Footer ── */
+footer {
+  padding: 1.5rem 2.5rem;
+  text-align: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.5;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .intro          { grid-template-columns: 1fr; gap: 2rem; }
+  .intro-right    { align-items: flex-start; }
+  nav             { gap: 1.2rem; }
+  .photo-frame    { width: 100%; height: 180px; }
+  .skills-grid    { grid-template-columns: repeat(2, 1fr); }
+  main            { gap: 3rem; }
+}

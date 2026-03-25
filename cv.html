@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Morgan — CV</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Geist:wght@300;400;500&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cv.css">
+</head>
+<body class="cv-body">
+
+  <nav class="cv-nav">
+    <a href="index.html">← Back</a>
+    <a href="https://linkedin.com/in/alexmorgan" target="_blank" rel="noopener" class="highlight">LinkedIn ↗</a>
+  </nav>
+
+  <main class="cv-main">
+    <div class="json-container">
+      <div class="json-body">
+        <pre class="json-pre" id="json-output"></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cv-footer">Manchester, UK &nbsp;·&nbsp; alex.morgan@email.com</footer>
+
+  <script>
+    /* ── CV data (edit here to update your CV) ── */
+    /* Source of truth is also kept in data/cv-data.js and data/cv.json */
+    const CV = {
+      "basics": {
+        "name": "Alex Morgan",
+        "label": "Senior QA Engineer",
+        "email": "alex.morgan@email.com",
+        "phone": "+44 7700 900123",
+        "location": "Manchester, UK",
+        "url": "https://alexmorgan.qa",
+        "linkedin": "https://linkedin.com/in/alexmorgan",
+        "github": "https://github.com/alexmorgan-qa"
+      },
+
+      "summary": "Senior QA Engineer with 6 years of experience designing and implementing test strategies for high-traffic web and mobile products. Specialises in test automation, CI/CD integration, and building quality-first engineering cultures.",
+
+      "experience": [
+        {
+          "role": "Senior QA Engineer",
+          "company": "Finova Financial",
+          "from": "2022-01",
+          "to": null,
+          "current": true,
+          "highlights": [
+            "Led automation strategy for £2M platform migration — 92% coverage pre-launch",
+            "Reduced CI pipeline runtime from 45 min to 9 min via parallelisation",
+            "Introduced Pact contract testing across 14 microservices, cutting integration defects by 67%",
+            "Mentored 3 junior QA engineers; two promoted within 18 months"
+          ],
+          "stack": ["Playwright", "TypeScript", "Pact", "GitHub Actions", "Docker"]
+        },
+        {
+          "role": "QA Engineer",
+          "company": "Shopbloc Commerce",
+          "from": "2020-03",
+          "to": "2021-12",
+          "current": false,
+          "highlights": [
+            "Built Selenium + TestNG framework from scratch across 3 product verticals",
+            "Identified performance bottleneck causing £80k/hr revenue loss via k6",
+            "Championed BDD adoption with Cucumber, improving dev-QA collaboration"
+          ],
+          "stack": ["Selenium", "Java", "Cucumber", "k6", "Jenkins"]
+        },
+        {
+          "role": "QA Analyst",
+          "company": "Orbital Digital Agency",
+          "from": "2018-09",
+          "to": "2020-02",
+          "current": false,
+          "highlights": [
+            "Manual and exploratory testing across 12 client websites and mobile apps",
+            "Wrote and maintained 400+ test cases in TestRail",
+            "Introduced WCAG 2.1 AA accessibility testing as a standard QA checkpoint"
+          ],
+          "stack": ["TestRail", "Postman", "Jira", "WCAG 2.1"]
+        }
+      ],
+
+      "skills": [
+        { "name": "Test Automation", "level": "Expert",     "tools": ["Playwright", "Selenium", "Cypress"] },
+        { "name": "API Testing",     "level": "Expert",     "tools": ["Postman", "REST Assured", "Pact"] },
+        { "name": "CI / CD",         "level": "Advanced",   "tools": ["GitHub Actions", "Jenkins", "Docker"] },
+        { "name": "Performance",     "level": "Advanced",   "tools": ["k6", "JMeter", "Gatling"] },
+        { "name": "Mobile Testing",  "level": "Proficient", "tools": ["Appium", "BrowserStack"] },
+        { "name": "Languages",       "level": "Advanced",   "tools": ["TypeScript", "Java", "Python"] }
+      ],
+
+      "education": [
+        {
+          "institution": "University of Leeds",
+          "degree": "BSc Computer Science",
+          "grade": "2:1",
+          "from": 2015,
+          "to": 2018
+        }
+      ],
+
+      "certifications": [
+        { "name": "ISTQB Foundation Level",                    "issuer": "BCS",  "year": 2019 },
+        { "name": "ISTQB Advanced — Test Automation Engineer", "issuer": "BCS",  "year": 2021 },
+        { "name": "Certified Agile Tester (CAT)",              "issuer": "iSQI", "year": 2022 }
+      ],
+
+      "languages": [
+        { "language": "English", "fluency": "Native" },
+        { "language": "Spanish", "fluency": "Conversational" }
+      ]
+    };
+  </script>
+
+  <script src="js/cv.js"></script>
+
+</body>
+</html>
