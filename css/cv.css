@@ -1,126 +1,85 @@
 /* ─────────────────────────────────────────
-   Alex Morgan — QA Engineer
-   cv.css  —  JSON CV page
+   Adrian Clarke — QA Engineer
+   cv.css
 ───────────────────────────────────────── */
 
-/* ── CV-specific tokens ── */
 :root {
-  --cv-bg:        #161210;
-  --cv-surface:   #1e1a17;
-  --cv-border:    #2e2820;
-  --cv-toolbar:   #252019;
-
-  /* syntax colours — drawn from the existing palette */
-  --j-key:        #c4b49a;      /* warm parchment — keys */
-  --j-string:     #d4c5a9;      /* lighter cream — string values */
-  --j-number:     #eb8c62;      /* orange-adjacent — numbers */
-  --j-bool:       #eb4910;      /* brand orange — booleans */
-  --j-null:       #6b5f54;      /* muted warm — null */
-  --j-brace:      #7a6a5a;      /* brackets / braces */
-  --j-colon:      #4a3f36;      /* colons */
-  --j-comma:      #4a3f36;      /* commas */
-
   --mono: 'Geist Mono', monospace;
+
+  /* Syntax colours — warm tones drawn from style.css palette */
+  --j-key:    #9a8f85;   /* muted warm — keys */
+  --j-string: #1c1814;   /* --text — string values */
+  --j-number: #eb4910;   /* brand orange — numbers */
+  --j-bool:   #eb4910;   /* brand orange — booleans */
+  --j-null:   #b8a898;   /* soft warm — null */
+  --j-brace:  #b8a898;   /* soft warm — braces / brackets */
+  --j-punct:  #c8bdb2;   /* rule tone — colons / commas */
 }
 
-/* ── Page overrides ── */
-body.cv-body {
-  background: var(--bg);
-  color: var(--j-string);
+/* ── Page layout ── */
+main {
+  padding: 3rem 2rem 2rem;
+  justify-content: flex-start;
+  gap: 1.5rem;
 }
 
-/* ── Nav (inherits shared nav rules, overrides colours) ── */
-body.cv-body nav.cv-nav {
-  position: fixed; top: 0; right: 0;
-  padding: 1.75rem 2.5rem;
-  display: flex; gap: 1.5rem; align-items: center;
-  z-index: 10;
-}
-
-body.cv-body nav.cv-nav a {
-  color: var(--j-brace);
-}
-body.cv-body nav.cv-nav a:hover {
-  color: var(--j-key);
-}
-body.cv-body nav.cv-nav a.highlight {
-  color: var(--j-key);
-  border-bottom-color: var(--orange);
-}
-body.cv-body nav.cv-nav a.highlight:hover {
-  color: var(--orange);
-}
-
-/* ── Main layout ── */
-.cv-main {
-  flex: 1;
+.cv-layout {
+  width: 100%;
+  max-width: 780px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 5rem 2rem 4rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeUp 0.7s ease both;
+}
+
+/* ── Header bar: label left, nav right ── */
+.cv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* intro-label already styled in style.css — just remove its bottom margin here */
+.cv-header .intro-label {
+  margin-bottom: 0;
 }
 
 /* ── JSON container ── */
 .json-container {
   width: 100%;
-  max-width: 820px;
-  border-radius: 8px;
-  border: 1px solid var(--cv-border);
-  overflow: hidden;
-  animation: fadeUp 0.6s ease both;
-}
-
-/* ── JSON body ── */
-.json-body {
-  background: var(--cv-surface);
-  padding: 2rem 2.5rem;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2rem;
   overflow-x: auto;
+  animation: fadeUp 0.7s 0.1s ease both;
 }
 
+/* ── JSON pre ── */
 .json-pre {
   font-family: var(--mono);
   font-size: 0.78rem;
-  line-height: 1.85;
-  white-space: pre;
-  tab-size: 2;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  color: var(--j-string);
 }
 
-/* ── Syntax colours ── */
-.j-key    { color: var(--j-key); }
-.j-string { color: var(--j-string); }
-.j-number { color: var(--j-number); }
-.j-bool   { color: var(--j-bool); }
-.j-null   { color: var(--j-null); font-style: italic; }
-.j-brace  { color: var(--j-brace); }
-.j-bracket{ color: var(--j-brace); }
-.j-colon  { color: var(--j-colon); }
-.j-comma  { color: var(--j-comma); }
-
-/* ── Footer ── */
-.cv-footer {
-  padding: 1.5rem 2.5rem;
-  text-align: center;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--j-brace);
-  opacity: 0.4;
-  animation: fadeUp 0.7s 0.2s ease both;
-}
-
-/* ── Loading / error states ── */
-.j-loading {
-  color: var(--j-brace);
-  font-style: italic;
-}
-.j-error {
-  color: #7a4a3a;
-  font-style: italic;
-}
+/* ── Syntax token colours ── */
+.j-key     { color: var(--j-key); }
+.j-string  { color: var(--j-string); }
+.j-number  { color: var(--j-number); }
+.j-bool    { color: var(--j-bool); }
+.j-null    { color: var(--j-null); font-style: italic; }
+.j-brace   { color: var(--j-brace); }
+.j-bracket { color: var(--j-brace); }
+.j-colon   { color: var(--j-punct); }
+.j-comma   { color: var(--j-punct); }
+.j-error   { color: var(--muted); font-style: italic; }
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
-  .cv-main        { padding: 4.5rem 1rem 3rem; }
-  .json-body      { padding: 1.25rem 1rem; }
-  .json-pre       { font-size: 0.68rem; }
+  .cv-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .json-container { padding: 1.25rem; }
+  .json-pre { font-size: 0.68rem; }
 }
