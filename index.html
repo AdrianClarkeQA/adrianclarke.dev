@@ -8,88 +8,130 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <main>
-
-    <!-- Intro -->
-    <div class="intro">
-
-      <div class="intro-text">
-        <div class="intro-label">QA Engineer</div>
-        <h1 class="intro-name">Adrian<br><em>Clarke</em></h1>
-        <p class="intro-bio">
-          I find bugs before your users do. <br>Building tests,
-          owning strategy, and embedding quality into every stage of
-          the development cycle since 2017.
-          <br>
-          Pedantic since birth.
-          <br>
-          Based in West Midlands, UK. Open to senior roles.
-        </p>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">Adrian<em>Clarke</em>.dev</div>
+      <div class="nav-links">
+        <!-- <a href="cv.html">CV</a> --> CV
+        <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="nav-cta">Find me on LinkedIn ↗</a>
       </div>
-
-      <div class="intro-right">
-        <nav>
-          <a href="cv.html">CV</a>
-          <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="highlight">Find me on LinkedIn ↗</a>
-        </nav>
-
-        <div class="photo-frame">
-          <img src="images/avatar.jpg" alt="Adrian Clarke" class="photo-frame">
-        </div>
-      </div>
-
     </div>
+  </nav>
 
-    <!-- Skills -->
-    <div class="skills-block">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">QA Engineer · West Midlands, UK</p>
+      <h1 class="hero-title">
+        Adrian<br><em>Clarke</em>
+      </h1>
+      <p class="hero-bio">
+        I find bugs before your users do.<br>
+        Building tests, owning strategy, and embedding quality into every stage
+        of the development cycle.<br>
+        QA since 2017. <strong>Pedantic since birth.</strong> <br>
+        Open to senior roles.
+      </p>
+      <div class="hero-actions">
+        <a href="cv.html" class="btn-primary">View CV →</a>
+        <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="btn-ghost">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="images/avatar.jpg" alt="Adrian Clarke">
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars">
+    <div class="pillars-inner">
+      <div class="pillar">
+        <div class="pillar-icon">⚙</div>
+        <h3 class="pillar-title">Test Strategy</h3>
+        <p class="pillar-desc">Systematic frameworks built for long-term coverage, scalability, and confidence across every release.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">⚡</div>
+        <h3 class="pillar-title">Automation First</h3>
+        <p class="pillar-desc">Playwright, Selenium, and CI/CD pipelines that catch regressions before they reach production.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">◎</div>
+        <h3 class="pillar-title">Shift-Left Quality</h3>
+        <p class="pillar-desc">Embedding QA thinking into planning and design — because the cheapest bug is the one never written.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills-section">
+    <div class="skills-header">
+      <h2>Skills</h2>
       <div class="skills-rule"></div>
-      <span class="skills-label">Skills</span>
-      <div class="skills-grid">
-        <div class="skill">
-          <div class="skill-name">Test Automation</div>
-          <div class="skill-detail">Playwright · Selenium</div>
-        </div>
-        <div class="skill">
-          <div class="skill-name">API Testing</div>
-          <div class="skill-detail">Postman · REST Assured</div>
-        </div>
-        <div class="skill">
-          <div class="skill-name">CI / CD</div>
-          <div class="skill-detail">GitHub Actions · Jenkins</div>
-        </div>
-        <div class="skill">
-          <div class="skill-name">Performance</div>
-          <div class="skill-detail">k6 · JMeter</div>
-        </div>
-        <div class="skill">
-          <div class="skill-name">Mobile Testing</div>
-          <div class="skill-detail">Appium · BrowserStack</div>
-        </div>
-        <div class="skill">
-          <div class="skill-name">Languages</div>
-          <div class="skill-detail">TypeScript · Java · Python</div>
-        </div>
-        <div class="skill">
-          <div class="skill-name">Methodology</div>
-          <div class="skill-detail">BDD · TDD · Shift-Left</div>
-        </div>
-        <div class="skill">
-          <div class="skill-name">Exploratory</div>
-          <div class="skill-detail">SBET · Risk Mapping</div>
-        </div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill">
+        <div class="skill-name">Test Automation</div>
+        <div class="skill-detail">Playwright · Selenium</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">API Testing</div>
+        <div class="skill-detail">Postman · REST Assured</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Test Strategy</div>
+        <div class="skill-detail">Test Planning · Schema Validation</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Version Control</div>
+        <div class="skill-detail">Test Analysis Reviews · PR Reviews</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Mobile Testing</div>
+        <div class="skill-detail">iOS · Android</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Languages</div>
+        <div class="skill-detail">TypeScript · Java · Python</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Methodology</div>
+        <div class="skill-detail">Agile · TDD · Shift-Left</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Exploratory</div>
+        <div class="skill-detail">SBET · Risk Mapping</div>
       </div>
     </div>
+  </section>
 
-  </main>
+  <!-- QUOTE BAND -->
+  <section class="quote-band">
+    <p class="quote-text">
+      "Be curious, not judgmental."
+    </p>
+    <p class="quote-attr">— Personal Philosophy</p>
+  </section>
 
-  <footer>Vibe coded with claude.ai and some old-fashioned brainpower</footer>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Adrian<em>Clarke</em>.dev</div>
+      <div class="footer-links">
+        <a href="cv.html">CV</a>
+        <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="footer-note">Vibe coded with claude.ai and some old-fashioned brainpower</p>
+    </div>
+  </footer>
 
 </body>
 </html>
