@@ -1,11 +1,9 @@
 {
   "basics": {
-    "name": "Alex Morgan",
-    "label": "Senior QA Engineer",
-    "email": "alex.morgan@email.com",
-    "phone": "+44 7700 900123",
+    "name": "Adrian Clarke",
+    "label": "QA Engineer",
+    "email": "email@email.com",
     "location": "Manchester, UK",
-    "url": "https://alexmorgan.qa",
     "linkedin": "https://linkedin.com/in/alexmorgan",
     "github": "https://github.com/alexmorgan-qa"
   },
