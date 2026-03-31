@@ -8,37 +8,55 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Geist:wght@300;400;500&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/cv.css">
 </head>
 <body>
 
-  <main>
-
-    <div class="cv-layout">
-
-      <!-- Top bar: label left, nav right — mirrors the index.html intro header -->
-      <div class="cv-header">
-        <div class="intro-label">QA Engineer</div>
-        <nav>
-          <a href="index.html">← Back</a>
-          <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="highlight">Find me on LinkedIn ↗</a>
-        </nav>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">Adrian<em>Clarke</em>.dev</div>
+      <div class="nav-links">
+        <a href="index.html">← Home</a>
+        <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="nav-cta">My LinkedIn ↗</a>
       </div>
+    </div>
+  </nav>
 
-      <!-- Full-width JSON container -->
+  <!-- CV HERO — JSON left, photo right -->
+  <section class="hero">
+
+    <div class="cv-hero-content">
+      <p class="cv-eyebrow">Curriculum Vitae · Adrian Clarke</p>
       <div class="json-container">
-        <pre class="json-pre" id="json-output"></pre>
+        <pre class="json-pre" id="json-output">Loading…</pre>
       </div>
-
+      <div class="cv-download">
+        <a href="data/cv.json" download class="btn-primary">Download JSON ↓</a>
+        <a href="index.html" class="btn-ghost">← Back to portfolio</a>
+      </div>
     </div>
 
-  </main>
+    <div class="hero-photo">
+      <img src="images/avatar.jpg" alt="Adrian Clarke">
+    </div>
 
-  <footer>Vibe coded with claude.ai and some old-fashioned brainpower</footer>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Adrian<em>Clarke</em>.dev</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="footer-note">Vibe coded with claude.ai and some old-fashioned brainpower</p>
+    </div>
+  </footer>
 
   <script src="js/cv.js"></script>
 
