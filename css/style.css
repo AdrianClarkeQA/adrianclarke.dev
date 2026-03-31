@@ -1,12 +1,32 @@
+/* ═══════════════════════════════════════════════════════
+   Adrian Clarke — QA Engineer
+   style.css  (global + CV)
+═══════════════════════════════════════════════════════ */
+
+/* ── RESET ───────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── TOKENS ──────────────────────────────────────── */
 :root {
+  /* Brand */
   --orange:   #eb4910;
   --cream:    #f8f5f0;
   --dark:     #1a1714;
   --mid:      #3d3830;
   --muted:    #7a7065;
   --border:   #e0d8cf;
+
+  /* Monospace */
+  --mono: 'Geist Mono', monospace;
+
+  /* CV syntax colours — warm tones drawn from brand palette */
+  --j-key:    #8a8078;   /* keys — mid warm */
+  --j-string: #e8e0d5;   /* values — light cream (brightest) */
+  --j-number: #eb4910;   /* brand orange — numbers         */
+  --j-bool:   #eb4910;   /* brand orange — booleans        */
+  --j-null:   #b8a898;   /* soft warm — null               */
+  --j-brace:  #b8a898;   /* soft warm — braces / brackets  */
+  --j-punct:  #c8bdb2;   /* rule tone — colons / commas    */
 }
 
 html { font-size: 16px; scroll-behavior: smooth; }
@@ -417,6 +437,15 @@ footer {
     order: -1;
   }
 
+  .hero-photo img {
+    object-position: center 20%;
+  }
+
+  .nav-cta {
+    padding: 8px 14px !important;
+    font-size: 0.75rem !important;
+  }
+
   .hero-content { padding: 48px 24px; }
 
   .pillars-inner { grid-template-columns: 1fr; border-left: none; border-right: none; }
@@ -428,9 +457,19 @@ footer {
 
   .quote-band { padding: 72px 24px; }
   footer .footer-inner { padding: 32px 24px; }
+
+  /* CV responsive */
+  .cv-hero-content {
+    padding: 40px 24px;
+    max-height: none;
+  }
+
+  .json-container {
+    max-height: 420px;
+  }
 }
 
-/* ── FADE-IN ANIMATION ───────────────────────────── */
+/* ── ANIMATIONS ──────────────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -440,3 +479,81 @@ footer {
 .hero-title   { animation: fadeUp 0.5s 0.1s ease both; }
 .hero-bio     { animation: fadeUp 0.5s 0.2s ease both; }
 .hero-actions { animation: fadeUp 0.5s 0.3s ease both; }
+
+
+/* ═══════════════════════════════════════════════════════
+   CV PAGE
+═══════════════════════════════════════════════════════ */
+
+/* ── CV hero — JSON replaces the text content panel ── */
+.cv-hero-content {
+  padding: 48px 48px 48px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cv-eyebrow {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s ease both;
+}
+
+/* ── JSON container ── */
+.json-container {
+  background: var(--dark);
+  border: 1px solid var(--mid);
+  border-radius: 4px;
+  padding: 1.75rem 2rem;
+  overflow: auto;
+  flex: 1;
+  max-height: 560px;
+  animation: fadeUp 0.5s 0.1s ease both;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mid) transparent;
+}
+
+.json-container::-webkit-scrollbar { width: 6px; height: 6px; }
+.json-container::-webkit-scrollbar-track { background: transparent; }
+.json-container::-webkit-scrollbar-thumb { background: var(--mid); border-radius: 3px; }
+
+/* ── JSON pre ── */
+.json-pre {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  color: var(--j-string);
+}
+
+/* ── Syntax token colours ── */
+.j-key     { color: var(--j-key); }
+.j-string  { color: var(--j-string); }
+.j-number  { color: var(--j-number); }
+.j-bool    { color: var(--j-bool); }
+.j-null    { color: var(--j-null); font-style: italic; }
+.j-brace   { color: var(--j-brace); }
+.j-bracket { color: var(--j-brace); }
+.j-colon   { color: var(--j-punct); }
+.j-comma   { color: var(--j-punct); }
+.j-error   { color: var(--muted); font-style: italic; }
+
+/* ── CV download row ── */
+.cv-download {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeUp 0.5s 0.25s ease both;
+}
+
+.cv-download .btn-primary {
+  font-size: 0.8rem;
+  padding: 12px 22px;
+}
