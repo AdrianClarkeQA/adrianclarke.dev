@@ -1,10 +1,10 @@
 /* ─────────────────────────────────────────
    js/cv.js
-   Fetches data/cv.json and renders it as
+   Fetches /data/cv.json and renders it as
    syntax-highlighted HTML in #json-output.
 ───────────────────────────────────────── */
 
-fetch('data/cv.json')
+fetch('/data/cv.json')
   .then(function (res) { return res.json(); })
   .then(function (data) {
     var raw = JSON.stringify(data, null, 2);
