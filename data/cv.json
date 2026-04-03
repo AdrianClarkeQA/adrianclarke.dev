@@ -2,19 +2,18 @@
   "basics": {
     "name": "Adrian Clarke",
     "label": "QA Engineer",
-    "email": "email@email.com",
-    "location": "Manchester, UK",
-    "linkedin": "https://linkedin.com/in/alexmorgan",
-    "github": "https://github.com/alexmorgan-qa"
+    "location": "Staffordshire, UK",
+    "linkedin": "https://www.linkedin.com/in/adrian-clarke-37239218/",
+    "github": "https://github.com/AdrianClarkeQA"
   },
 
-  "summary": "Senior QA Engineer with 6 years of experience designing and implementing test strategies for high-traffic web and mobile products. Specialises in test automation, CI/CD integration, and building quality-first engineering cultures.",
+  "summary": "Senior QA Engineer with 6 years of experience designing and implementing test strategies for high-traffic web and mobile products. Specialises in test automation and building quality-first engineering cultures.",
 
   "experience": [
     {
-      "role": "Senior QA Engineer",
-      "company": "Finova Financial",
-      "from": "2022-01",
+      "role": "QA Engineer",
+      "company": "Click Dealer",
+      "from": "2020-11",
       "to": null,
       "current": true,
       "highlights": [
@@ -32,11 +31,11 @@
       "to": "2021-12",
       "current": false,
       "highlights": [
-        "Built Selenium + TestNG framework from scratch across 3 product verticals",
+        "Built Playwright + TypeScript framework from scratch across 3 product verticals",
         "Identified performance bottleneck causing £80k/hr revenue loss via k6",
         "Championed BDD adoption with Cucumber, improving dev–QA collaboration"
       ],
-      "stack": ["Selenium", "Java", "Cucumber", "k6", "Jenkins"]
+      "stack": ["Playwright", "JavaScript", "TypeScript"]
     },
     {
       "role": "QA Analyst",

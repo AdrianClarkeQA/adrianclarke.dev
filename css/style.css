@@ -545,7 +545,7 @@ footer {
 .j-error   { color: var(--muted); font-style: italic; }
 
 /* ── CV download row ── */
-.cv-download {
+.cv-footer {
   margin-top: 16px;
   display: flex;
   align-items: center;
@@ -553,7 +553,7 @@ footer {
   animation: fadeUp 0.5s 0.25s ease both;
 }
 
-.cv-download .btn-primary {
+.cv-footer .btn-primary {
   font-size: 0.8rem;
   padding: 12px 22px;
 }
