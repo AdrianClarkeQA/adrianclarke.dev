@@ -55,7 +55,7 @@ a { color: inherit; text-decoration: none; }
   position: sticky;
   top: 0;
   background: var(--cream);
-  z-index: 100;
+  z-index: 1000;
 }
 
 .nav-inner {
@@ -120,7 +120,7 @@ a { color: inherit; text-decoration: none; }
   border: none;
   cursor: pointer;
   padding: 8px;
-  z-index: 200;
+  z-index: 1001;
 }
 
 .nav-toggle span {
@@ -475,13 +475,9 @@ footer {
 
   .nav-links a {
     padding: 12px 0;
-    border-bottom: 1px solid var(--border);
     font-size: 0.95rem;
     color: var(--muted);
-  }
-
-  .nav-links a:last-child {
-    border-bottom: none;
+    text-align: right;
   }
 
   .nav-cta {
