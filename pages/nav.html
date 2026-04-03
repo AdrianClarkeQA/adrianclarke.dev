@@ -1,10 +1,21 @@
 <nav class="nav">
   <div class="nav-inner">
-      <a href="/index.html" class="nav-brand">Adrian<em>Clarke</em>.dev</a>
-    <div class="nav-links">
+    <a href="/index.html" class="nav-brand">Adrian<em>Clarke</em>.dev</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="/pages/about-me.html">About Me</a>
       <a href="/pages/cv.html">My CV</a>
       <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="nav-cta">My LinkedIn ↗</a>
     </div>
   </div>
 </nav>
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links  = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+</script>
