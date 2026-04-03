@@ -31,6 +31,8 @@
           toggle.setAttribute('aria-expanded', open);
         });
       }
+
+      if (window.__initThemeToggle) window.__initThemeToggle();
     })
     .catch(function (err) {
       console.warn(err);
