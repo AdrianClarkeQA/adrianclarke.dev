@@ -15,6 +15,7 @@
   --mid:      #3d3830;
   --muted:    #7a7065;
   --border:   #e0d8cf;
+  --edge:     #b5bfb0;
 
   /* Monospace */
   --mono: 'Geist Mono', monospace;
@@ -32,7 +33,7 @@
 html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
-  background: var(--cream);
+  background: var(--edge);
   color: var(--dark);
   font-family: 'Geist', sans-serif;
   font-weight: 400;
@@ -54,7 +55,12 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: var(--cream);
+  background: linear-gradient(to right,
+    var(--edge) calc(50% - 570px),
+    var(--cream) calc(50% - 570px),
+    var(--cream) calc(50% + 570px),
+    var(--edge) calc(50% + 570px)
+  );
   z-index: 1000;
 }
 
@@ -62,7 +68,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 0 0 0 48px;
+  padding: 0 48px;
   height: 64px;
   max-width: 1140px;
   margin: 0 auto;
@@ -176,11 +182,13 @@ a { color: inherit; text-decoration: none; }
 .hero {
   max-width: 1140px;
   margin: 0 auto;
+  background: var(--cream);
   display: grid;
   grid-template-columns: 1fr 360px;
   gap: 0;
   min-height: calc(100vh - 64px);
   max-height: 760px;
+  padding-right: 48px;
 }
 
 .hero-content {
@@ -288,7 +296,12 @@ a { color: inherit; text-decoration: none; }
 
 /* ── PILLARS ─────────────────────────────────────── */
 .pillars {
-  background: #eeebe5;
+  background: linear-gradient(to right,
+    var(--edge) calc(50% - 570px),
+    #eeebe5 calc(50% - 570px),
+    #eeebe5 calc(50% + 570px),
+    var(--edge) calc(50% + 570px)
+  );
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -333,6 +346,7 @@ a { color: inherit; text-decoration: none; }
   padding: 96px 48px;
   max-width: 1140px;
   margin: 0 auto;
+  background: var(--cream);
 }
 
 .skills-header {
@@ -387,7 +401,12 @@ a { color: inherit; text-decoration: none; }
 
 /* ── QUOTE BAND ──────────────────────────────────── */
 .quote-band {
-  background: #f0e8e3;
+  background: linear-gradient(to right,
+    var(--edge) calc(50% - 570px),
+    #f0e8e3 calc(50% - 570px),
+    #f0e8e3 calc(50% + 570px),
+    var(--edge) calc(50% + 570px)
+  );
   padding: 96px 48px;
   text-align: center;
   position: relative;
@@ -398,7 +417,7 @@ a { color: inherit; text-decoration: none; }
   content: '\201C';
   position: absolute;
   top: -40px;
-  right: 5%;
+  right: max(3%, calc(50% - 490px));
   font-family: 'Barlow', sans-serif;
   font-size: 28rem;
   font-weight: 700;
@@ -533,6 +552,7 @@ footer {
   .hero {
     grid-template-columns: 1fr;
     max-height: none;
+    padding-right: 0;
   }
 
   .hero-photo {
@@ -665,17 +685,32 @@ footer {
 ═══════════════════════════════════════════════════════ */
 
 [data-theme="dark"] {
-  --cream:  #1e1b18;
+  --cream:  #2c2825;
   --dark:   #f0ece6;
   --mid:    #c8bdb2;
   --muted:  #8a8078;
   --border: #2e2a26;
+  --edge:   #1a1816;
 }
 
 /* Sections with hardcoded light backgrounds */
-[data-theme="dark"] .pillars          { background: #242018; }
+[data-theme="dark"] .pillars {
+  background: linear-gradient(to right,
+    var(--edge) calc(50% - 570px),
+    #242018 calc(50% - 570px),
+    #242018 calc(50% + 570px),
+    var(--edge) calc(50% + 570px)
+  );
+}
 [data-theme="dark"] .skill:hover      { background: #28241f; }
-[data-theme="dark"] .quote-band       { background: #221e1a; }
+[data-theme="dark"] .quote-band {
+  background: linear-gradient(to right,
+    var(--edge) calc(50% - 570px),
+    #221e1a calc(50% - 570px),
+    #221e1a calc(50% + 570px),
+    var(--edge) calc(50% + 570px)
+  );
+}
 
 /* Footer has var(--dark) as bg which inverts — restore a proper dark */
 [data-theme="dark"] footer            { background: #0f0d0b; }
