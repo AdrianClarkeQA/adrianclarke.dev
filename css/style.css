@@ -15,7 +15,7 @@
   --mid:      #3d3830;
   --muted:    #7a7065;
   --border:   #e0d8cf;
-  --edge:     #b5bfb0;
+  --edge:     #2F3E46;
 
   /* Monospace */
   --mono: 'Geist Mono', monospace;
@@ -52,7 +52,6 @@ a { color: inherit; text-decoration: none; }
 
 /* ── NAV ─────────────────────────────────────────── */
 .nav {
-  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   background: linear-gradient(to right,
@@ -72,6 +71,7 @@ a { color: inherit; text-decoration: none; }
   height: 64px;
   max-width: 1140px;
   margin: 0 auto;
+  border-bottom: 1px solid var(--border);
 }
 
 .nav-brand {
@@ -300,8 +300,6 @@ a { color: inherit; text-decoration: none; }
     #eeebe5 calc(50% + 570px),
     var(--edge) calc(50% + 570px)
   );
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
 }
 
 .pillars-inner {
@@ -309,8 +307,7 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
+  border: 1px solid var(--border);
 }
 
 .pillar {
