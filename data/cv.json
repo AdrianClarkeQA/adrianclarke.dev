@@ -9,8 +9,8 @@
     "eyes": true
   },
 
-  "summary": "Senior QA Engineer with 6 years of experience designing and implementing test strategies for high-traffic web and mobile products. Specialises in test automation and building quality-first engineering cultures.",
-
+  "summary": "Experienced QA Engineer with a demonstrated history of working in the digital landscape. Strong quality assurance professional with expertise in test automation, QA automation, and analytical problem solving. Previous background in SEO, SEM, digital marketing, social media, and Google Adwords.",
+  
   "experience": [
     {
       "role": "QA Engineer",
@@ -19,68 +19,102 @@
       "to": null,
       "current": true,
       "highlights": [
-        "Led automation strategy for £2M platform migration — 92% coverage pre-launch",
-        "Reduced CI pipeline runtime from 45 min to 9 min via parallelisation",
-        "Introduced Pact contract testing across 14 microservices, cutting integration defects by 67%",
-        "Mentored 3 junior QA engineers; two promoted within 18 months"
+        "Lead QA activities across digital automotive software products",
+        "Drive test automation and quality assurance strategy",
+        "Collaborate with engineering teams to maintain product quality standards",
+        "Mentored 2 QA engineers. Set up processes for onboarding external QA resources"
       ],
-      "stack": ["Playwright", "TypeScript", "Pact", "GitHub Actions", "Docker"]
+      "stack": ["Playwright", "TypeScript",  "GitHub", "Postman"]
     },
     {
-      "role": "QA Engineer",
-      "company": "Shopbloc Commerce",
-      "from": "2020-03",
-      "to": "2021-12",
+      "role": "Studio Manager",
+      "company": "base32",
+      "from": "2020-07",
+      "to": "2021-11",
       "current": false,
       "highlights": [
-        "Built Playwright + TypeScript framework from scratch across 3 product verticals",
-        "Identified performance bottleneck causing £80k/hr revenue loss via k6",
-        "Championed BDD adoption with Cucumber, improving dev–QA collaboration"
+        "Managed studio operations and project delivery for a small digital agency",
+        "Oversaw team workflow and production output on a multitude of client contracts",
+        "Sole testing resource for small development team, responsible for manual testing of client projects"
       ],
-      "stack": ["Playwright", "JavaScript", "TypeScript"]
+      "stack": ["Manual Testing", "QA Processes", "Project Management", "Team Leadership"]
+    },
+    {
+      "role": "QA Officer",
+      "company": "Click Dealer",
+      "from": "2019-06",
+      "to": "2020-07",
+      "current": false,
+      "highlights": [
+        "Performed software quality assurance testing across web platforms",
+        "Executed manual and exploratory testing processes"
+      ],
+      "stack": ["Manual Testing", "QA Processes"]
     },
     {
       "role": "QA Analyst",
-      "company": "Orbital Digital Agency",
-      "from": "2018-09",
-      "to": "2020-02",
+      "company": "Digital Balance UK",
+      "from": "2017-11",
+      "to": "2019-06",
       "current": false,
       "highlights": [
-        "Manual and exploratory testing across 12 client websites and mobile apps",
-        "Wrote and maintained 400+ test cases in TestRail",
-        "Introduced WCAG 2.1 AA accessibility testing as a standard QA checkpoint"
+        "Conducted QA analysis and testing for digital products in a fast-paced environment",
+        "Supported release validation, regression testing, and defect identification"
       ],
-      "stack": ["TestRail", "Postman", "Jira", "WCAG 2.1"]
+      "stack": ["Manual Testing", "Defect Analysis"]
+    },
+    {
+      "role": "Various Digital Marketing Roles",
+      "company": "Tradedoubler, TheSearchworks, and others",
+      "from": "2007-03",
+      "to": "2017-11",
+      "current": false,
+      "highlights": [
+        "Managed paid search campaigns for high value brand clients, improving click-through rates and driving brand awareness traffic",
+        "Conducted keyword research, on-page optimization, and link-building strategies"
+      ],
+      "stack": ["PPC", "Keyword Research", "SEM Analysis", "Google Adwords", "Google Analytics"]
     }
   ],
 
   "skills": [
-    { "name": "Test Automation", "level": "Expert",     "tools": ["Playwright", "Selenium", "Cypress"] },
-    { "name": "API Testing",      "level": "Expert",     "tools": ["Postman", "REST Assured", "Pact"] },
-    { "name": "CI / CD",          "level": "Advanced",   "tools": ["GitHub Actions", "Jenkins", "Docker"] },
-    { "name": "Performance",      "level": "Advanced",   "tools": ["k6", "JMeter", "Gatling"] },
-    { "name": "Mobile Testing",   "level": "Proficient", "tools": ["Appium", "BrowserStack"] },
-    { "name": "Languages",        "level": "Advanced",   "tools": ["TypeScript", "Java", "Python"] }
+    { "name": "Test Automation",    "tools": ["Playwright"] },
+    { "name": "API Testing",        "tools": ["Postman", "REST Assured"] },
+    { "name": "Mobile Testing",     "tools": ["BrowserStack"] },
+    { "name": "Languages",          "tools": ["TypeScript", "Java", "Python"] },
+    { "name": "Analytical Skills",  "tools": ["Data Analysis", "Problem Solving,"] },
+    { "name": "Team Leadership",    "tools": ["Mentoring", "Team Management"] },
+    { "name": "Project Management", "tools": ["Agile Methodologies", "JIRA"] }
   ],
 
   "education": [
     {
-      "institution": "University of Leeds",
-      "degree": "BSc Computer Science",
+      "institution": "Staffordshire University",
+      "degree": "BSc Hons Internet Systems & e-Commerce",
       "grade": "2:1",
-      "from": 2015,
-      "to": 2018
+      "from": 2002,
+      "to": 2005
+    },
+    {
+      "institution": "Trentham High School",
+      "degree": "BS Internet Marketing and E-commerce",
+      "grade": "B-C",
+      "from": 1995,
+      "to": 2000
     }
   ],
 
   "certifications": [
-    { "name": "ISTQB Foundation Level",                    "issuer": "BCS",  "year": 2019 },
-    { "name": "ISTQB Advanced — Test Automation Engineer", "issuer": "BCS",  "year": 2021 },
-    { "name": "Certified Agile Tester (CAT)",              "issuer": "iSQI", "year": 2022 }
+    {
+      "name": "Certified Tester Foundation Level (CTFL)",
+      "issuer": "ISTQB",
+      "year": 2025
+    }
   ],
 
   "languages": [
-    { "language": "English", "fluency": "Native" },
-    { "language": "Spanish", "fluency": "Conversational" }
-  ]
+    { 
+      "language": "English", "fluency": "Native" 
+    } 
+   ]
 }
