@@ -16,6 +16,8 @@
       return res.text();
     })
     .then(function (html) {
+      // Inject current year
+      html = html.replace('<span id="year"></span>', new Date().getFullYear());
       const placeholder = document.getElementById('footer-placeholder');
       if (placeholder) {
         placeholder.outerHTML = html;
