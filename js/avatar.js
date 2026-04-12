@@ -1,8 +1,9 @@
 (function () {
   var avatars = [
-    '/images/avatar-caricature.jpg',
-    '/images/avatar-8bit.jpg',
-    '/images/avatar-polygon.jpg',
+    // '/images/avatar-caricature.jpg',
+    // '/images/avatar-polygon.jpg',
+    '/images/avatar-hoodie.jpg',
+    '/images/avatar-suit.jpg',
     '/images/avatar-brick.jpg'
   ];
   var img = document.getElementById('avatar-img');
