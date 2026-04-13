@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Adrian Clarke — Curriculum Vitae</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Theme — must run synchronously before paint to prevent flash -->
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div id="nav-placeholder"></div>
+  <script src="/js/nav-loader.js" defer></script>
+
+  <!-- PRINTABLE CV SECTION -->
+  <section class="cv-print-section">
+    <div class="cv-print-toolbar">
+      <h1 class="cv-print-title">Curriculum Vitae</h1>
+      <div class="cv-print-actions">
+        <button type="button" class="btn-ghost cv-print-button" id="cv-print-btn">Print</button>
+        <a href="/pages/cv.html" class="btn-ghost cv-print-button">← Back</a>
+      </div>
+    </div>
+    <div class="cv-print-container">
+      <div id="cv-print-content">
+        <p style="text-align: center; padding: 40px 20px; color: var(--muted);">Loading CV...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div data-include="/pages/footer.html"></div>
+
+  <!-- CV Renderer for print page -->
+  <script src="/js/cv-print.js"></script>
+  <script src="/js/footer-loader.js"></script>
+
+</body>
+</html>
