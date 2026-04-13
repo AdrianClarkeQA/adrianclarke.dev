@@ -33,6 +33,7 @@
         <pre class="json-pre" id="json-output">Loading…</pre>
       </div>
       <div class="cv-footer">
+        <a href="/pages/curriculum-vitae.html" class="btn-primary">Print-friendly version</a>
         <!-- <a href="/data/cv.json" download class="btn-primary">Download JSON ↓</a> -->
         <a href="/index.html" class="btn-ghost">← Back to home</a>
       </div>
@@ -44,6 +45,22 @@
     </div>
 
   </section>
+
+  <div class="cv-modal" id="cv-modal" hidden>
+    <div class="cv-modal-backdrop" data-close-modal></div>
+    <div class="cv-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+      <div class="cv-modal-toolbar">
+        <h2 class="cv-modal-title" id="cv-modal-title">Curriculum Vitae</h2>
+        <div class="cv-modal-actions">
+          <button type="button" class="btn-ghost cv-modal-print" id="cv-modal-print">Print</button>
+          <button type="button" class="btn-ghost cv-modal-close" data-close-modal aria-label="Close CV modal">Close</button>
+        </div>
+      </div>
+      <div class="cv-modal-content" id="cv-modal-content">
+        <p class="cv-doc-loading">Loading document...</p>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <div data-include="/pages/footer.html"></div>
