@@ -1,0 +1,11 @@
+{
+  "name": "adrianclarke-dev",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "minify:js": "node tools/minify-js.mjs"
+  },
+  "devDependencies": {
+    "terser": "^5.39.0"
+  }
+}
