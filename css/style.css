@@ -828,14 +828,57 @@ footer {
 .cv-footer {
   margin-top: 16px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 20px;
   animation: fadeUp 0.5s 0.25s ease both;
+}
+
+.cv-print-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.cv-print-note {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cv-print-note-title {
+  font: inherit;
+}
+
+.cv-print-note-body {
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cv-print-note-line,
+.cv-print-note-signoff {
+  display: block;
 }
 
 .cv-footer .btn-primary {
   font-size: 0.8rem;
   padding: 12px 22px;
+}
+
+.cv-footer .btn-ghost {
+  white-space: nowrap;
 }
 
 /* ── CV modal document ── */
