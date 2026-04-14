@@ -8,7 +8,7 @@
  */
 
 (function () {
-  const FOOTER_PATH = '/pages/footer.html';
+  const FOOTER_PATH = '/pages/_footer.html';
 
   fetch(FOOTER_PATH)
     .then(function (res) {

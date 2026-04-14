@@ -8,7 +8,7 @@
  */
 
 (function () {
-  const NAV_PATH = '/pages/nav.html';
+  const NAV_PATH = '/pages/_nav.html';
 
   fetch(NAV_PATH)
     .then(function (res) {
