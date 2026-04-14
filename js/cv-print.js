@@ -47,7 +47,7 @@ function renderCvPrintDocument(data) {
     '</ul>',
     '</div>',
     '<div class="cv-doc-header-avatar">',
-    '<img src="/images/avatar-brick-square.jpg" alt="Adrian Clarke avatar">',
+    '<img src="/assets/images/avatar-brick-square.jpg" alt="Adrian Clarke avatar">',
     '</div>',
     '</header>',
     '<div class="cv-doc-grid">',
