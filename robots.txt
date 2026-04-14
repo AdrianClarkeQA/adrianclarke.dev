@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /pages/cv.html
+Disallow: /pages/curriculum-vitae.html
