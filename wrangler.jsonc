@@ -9,6 +9,17 @@
     "directory": ".",
     "not_found_handling": "404-page"
   },
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "adrianclarke.dev/*",
+      "zone_name": "adrianclarke.dev"
+    },
+    {
+      "pattern": "www.adrianclarke.dev/*",
+      "zone_name": "adrianclarke.dev"
+    }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]
