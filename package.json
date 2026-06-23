@@ -3,9 +3,15 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "minify:js": "node tools/minify-js.mjs"
+    "minify:js": "node tools/minify-js.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "http-server": "^14.1.1",
     "terser": "^5.39.0"
   }
 }
