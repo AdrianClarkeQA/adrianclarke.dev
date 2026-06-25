@@ -1,6 +1,10 @@
 # dependencies
 node_modules/
 
+# playwright artifacts
+playwright-report/
+test-results/
+
 # wrangler files
 .wrangler
 .dev.vars*
