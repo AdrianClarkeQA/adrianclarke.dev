@@ -1,0 +1,1997 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <title>Vehicle Data Report</title>
+  <style>
+    :root {
+      --bg: #f3f1ed;
+      --paper: #fffdf9;
+      --ink: #1e1b18;
+      --ink-soft: #5e554d;
+      --line: #d9cec2;
+      --ok: #2f7f5f;
+      --bad: #b00020;
+      --shadow: 0 12px 30px rgba(41, 26, 16, 0.08);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at 15% 0%, #fff8f1 0%, transparent 45%),
+        radial-gradient(circle at 100% 30%, #f6ebe3 0%, transparent 40%),
+        var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Trebuchet MS", "Gill Sans", sans-serif;
+      line-height: 1.45;
+    }
+
+    .page {
+      width: min(1120px, 92vw);
+      margin: 28px auto 42px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 16px;
+      background: linear-gradient(135deg, #fffdf8 0%, #fff4ec 65%, #fde8df 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(176, 74, 47, 0.1);
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      z-index: 1;
+    }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 16px;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero-photo {
+            margin: 0;
+            border: 1px solid rgba(31, 24, 20, 0.12);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 10px 24px rgba(42, 28, 19, 0.14);
+            aspect-ratio: 4 / 3;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .title {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+      letter-spacing: 0.02em;
+      font-weight: 780;
+    }
+
+    .subtitle {
+      margin: 4px 0 0;
+      color: var(--ink-soft);
+      font-size: 0.97rem;
+    }
+
+    .plate {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #b69672;
+      background: #fef1b6;
+      color: #231d14;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-width: 142px;
+      justify-content: center;
+      font-size: 1.05rem;
+      z-index: 1;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      z-index: 1;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #3f362e;
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .chip.ok { color: var(--ok); }
+    .chip.bad { color: var(--bad); }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 1.06rem;
+      letter-spacing: 0.02em;
+      font-weight: 760;
+    }
+
+    .kpi-grid, .price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .kpi {
+      border: 1px dashed #d8cabe;
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 12px;
+    }
+
+    .kpi-label {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .kpi-value {
+      margin: 5px 0 0;
+      font-size: 1.08rem;
+      font-weight: 760;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+    }
+
+    .spec-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      background: #fff;
+    }
+
+    .spec-label {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+    }
+
+    .spec-value {
+      margin: 2px 0 0;
+      font-size: 0.98rem;
+      font-weight: 650;
+    }
+
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline li {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+
+    .badge.pass { color: var(--ok); border-color: #a5d2be; background: #edf8f2; }
+    .badge.fail { color: var(--bad); border-color: #db9da8; background: #fdecef; }
+
+    .notes {
+      margin: 0;
+      padding-left: 18px;
+      color: #413730;
+      font-size: 0.92rem;
+      display: grid;
+      gap: 4px;
+    }
+
+    .features-wrap { display: grid; gap: 8px; }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 11px 13px;
+      font-weight: 680;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(180deg, #fff, #fffcf9);
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .summary-meta {
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .feature-list {
+      margin: 0;
+      padding: 0 13px 12px;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .feature-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      background: #fffcfa;
+      display: grid;
+      gap: 2px;
+    }
+
+    .feature-name {
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    .feature-meta {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.83rem;
+    }
+
+    .foot {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      padding-top: 2px;
+    }
+
+    @media (max-width: 880px) {
+      .grid-two { grid-template-columns: 1fr; }
+      .hero-top { flex-direction: column; }
+            .hero-main { grid-template-columns: 1fr; }
+            .hero-photo { max-height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" id="app">
+    <section class="card hero">
+            <div class="hero-main">
+                <div>
+                    <div class="hero-top">
+                        <div>
+                            <h1 class="title" id="title"></h1>
+                            <p class="subtitle" id="subtitle"></p>
+                        </div>
+                        <div class="plate" id="plate"></div>
+                    </div>
+                    <div class="chip-row" id="statusChips"></div>
+        </div>
+                <figure class="hero-photo">
+                    <img src="CH64THO.jpg" alt="Fiat 500 CH64THO">
+                </figure>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Quick Snapshot</h2>
+      <div class="kpi-grid" id="kpis"></div>
+    </section>
+
+    <section class="grid-two">
+      <article class="card">
+        <h2 class="section-title">Core Specification</h2>
+        <div class="spec-grid" id="specs"></div>
+      </article>
+      <article class="card">
+        <h2 class="section-title">Valuations</h2>
+        <div class="price-grid" id="valuations"></div>
+      </article>
+    </section>
+
+    <section class="grid-two">
+      <article class="card">
+        <h2 class="section-title">Ownership and Registration</h2>
+        <div class="spec-grid" id="history"></div>
+      </article>
+      <article class="card">
+        <h2 class="section-title">MOT History</h2>
+        <ul class="timeline" id="motTimeline"></ul>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Feature Breakdown</h2>
+      <div class="features-wrap" id="features"></div>
+    </section>
+
+    <p class="foot">Data transformed into a human-readable vehicle report.</p>
+  </main>
+
+  <script id="carData" type="application/json">{
+    "vehicle": {
+        "ownershipCondition": "Used",
+        "registration": "CH64THO",
+        "vin": "ZFA3120000J495391",
+        "engineNumber": "1464438",
+        "make": "Fiat",
+        "model": "500",
+        "generation": "Hatchback (2008 - 2016)",
+        "derivative": "1.2 S Hatchback 3dr Petrol Manual Euro 6 (s/s) (69 bhp)",
+        "derivativeId": "fbb5490561f5497eb7bb59f0c2398832",
+        "vehicleType": "Car",
+        "trim": "S",
+        "bodyType": "Hatchback",
+        "fuelType": "Petrol",
+        "cabType": null,
+        "transmissionType": "Manual",
+        "wheelbaseType": "STD",
+        "roofHeightType": null,
+        "drivetrain": "Front Wheel Drive",
+        "seats": 4,
+        "doors": 3,
+        "cylinders": 4,
+        "valves": 8,
+        "engineTorqueNM": 102,
+        "co2EmissionGPKM": 110,
+        "topSpeedMPH": 99,
+        "zeroToSixtyMPHSeconds": null,
+        "zeroToOneHundredKMPHSeconds": 12.9,
+        "badgeEngineSizeLitres": 1.2,
+        "badgeEngineSizeCC": null,
+        "engineCapacityCC": 1242,
+        "enginePowerBHP": 69,
+        "enginePowerPS": 70,
+        "fuelCapacityLitres": 35.0,
+        "emissionClass": "Euro 6",
+        "owners": 4,
+        "fuelEconomyNEDCExtraUrbanMPG": 65.7,
+        "fuelEconomyNEDCUrbanMPG": 51.4,
+        "fuelEconomyNEDCCombinedMPG": 60.1,
+        "fuelEconomyWLTPLowMPG": null,
+        "fuelEconomyWLTPMediumMPG": null,
+        "fuelEconomyWLTPHighMPG": null,
+        "fuelEconomyWLTPExtraHighMPG": null,
+        "fuelEconomyWLTPCombinedMPG": null,
+        "bootSpaceSeatsUpLitres": null,
+        "bootSpaceSeatsDownLitres": null,
+        "insuranceGroup": "09",
+        "insuranceSecurityCode": "U",
+        "firstRegistrationDate": "2015-11-30",
+        "colour": "White",
+        "style": null,
+        "subStyle": null,
+        "lengthMM": 3546,
+        "heightMM": 1488,
+        "widthMM": 1627,
+        "wheelbaseMM": 2300,
+        "payloadLengthMM": null,
+        "payloadWidthMM": null,
+        "payloadHeightMM": null,
+        "payloadWeightKG": null,
+        "minimumKerbWeightKG": null,
+        "grossVehicleWeightKG": null,
+        "batteryRangeMiles": null,
+        "batteryCapacityKWH": null,
+        "batteryUsableCapacityKWH": null,
+        "fuelDelivery": "Injection",
+        "gears": 5,
+        "startStop": true,
+        "engineTorqueLBFT": 75.22,
+        "grossCombinedWeightKG": null,
+        "grossTrainWeightKG": null,
+        "boreMM": 71,
+        "strokeMM": 79,
+        "cylinderArrangement": "Inline",
+        "engineMake": "Fiat",
+        "valveGear": "Single Overhead Camshaft",
+        "axles": 2,
+        "countryOfOrigin": "Poland",
+        "driveType": "4X2",
+        "payloadVolumeCubicMetres": null,
+        "rde2Compliant": null,
+        "vehicleExciseDutyWithoutSupplementGBP": 20,
+        "sector": "City Car Hatch 3Dr",
+        "oem": {
+            "make": "Fiat",
+            "model": "Fiat 500",
+            "derivative": "500 1.2 69hp S",
+            "bodyType": "Hatchback",
+            "transmissionType": "Manual",
+            "drivetrain": "Front Wheel Drive",
+            "wheelbaseType": null,
+            "roofHeightType": null,
+            "engineType": null,
+            "engineTechnology": null,
+            "engineMarketing": null,
+            "editionDescription": null,
+            "colour": "Bossa Nova White"
+        },
+        "manufacturerWarrantyCorrosionDurationYears": 8,
+        "manufacturerWarrantyPaintworkDurationYears": 3,
+        "manufacturerWarrantyStandardDurationYears": 3,
+        "manufacturerWarrantyStandardDistanceMiles": 100000,
+        "manufacturerWarrantyBatteryDurationYears": null,
+        "manufacturerWarrantyBatteryDistanceMiles": null
+    },
+    "history": {
+        "scrapped": false,
+        "stolen": false,
+        "imported": false,
+        "exported": false,
+        "previousOwners": 3,
+        "yearOfManufacture": 2015,
+        "keeperChanges": [
+            {
+                "dateOfLastKeeper": "2022-12-23"
+            },
+            {
+                "dateOfLastKeeper": "2019-03-29"
+            },
+            {
+                "dateOfLastKeeper": "2017-02-19"
+            }
+        ],
+        "v5cs": [
+            {
+                "issuedDate": "2023-03-10"
+            },
+            {
+                "issuedDate": "2023-01-09"
+            },
+            {
+                "issuedDate": "2019-04-04"
+            }
+        ]
+    },
+    "features": [
+        {
+            "name": "12V Socket - Front",
+            "genericName": "12V Socket",
+            "type": "Standard",
+            "category": "Audio and Communications",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "823"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "16in Alloy Wheels - 420",
+            "genericName": "Wheels - 16in Alloys",
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "420"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "16in Alloy Wheels - 56J",
+            "genericName": "Wheels - 16in Alloys",
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 108.33,
+            "vatPrice": 21.67,
+            "factoryCodes": [
+                "56J"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "16in Alloy Wheels - 5A6",
+            "genericName": "Wheels - 16in Alloys",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "5A6"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "16in Alloy Wheels - 6JD",
+            "genericName": "Wheels - 16in Alloys",
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 108.33,
+            "vatPrice": 21.67,
+            "factoryCodes": [
+                "6JD"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "ABS - Anti-Lock Braking System",
+            "genericName": "ABS - Anti-lock Braking System",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "009"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "ASR - Anti-Slip Regulation",
+            "genericName": "Traction Control",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Airbags - Driver",
+            "genericName": "Airbags - Driver",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "500"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Airbags - Front Side",
+            "genericName": "Airbags - Front Side",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Airbags - Passenger",
+            "genericName": "Airbags - Passenger",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "502",
+                "Y1Z"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "BAS - Brake Assistance System",
+            "genericName": "EBA - Electronic Brake Assistance",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "052"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Bi-Xenon Headlights",
+            "genericName": "Headlights - Xenon",
+            "type": "Optional",
+            "category": "Illumination",
+            "basicPrice": 508.33,
+            "vatPrice": 101.67,
+            "factoryCodes": [
+                "230"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Blue&Me - Hands Free System with USB Port",
+            "genericName": "Bluetooth",
+            "type": "Standard",
+            "category": "Audio and Communications",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "6RR"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Blue&Me - Predisposition for TomTom",
+            "genericName": "Audio & Communication",
+            "type": "Optional",
+            "category": "Audio and Communications",
+            "basicPrice": 41.67,
+            "vatPrice": 8.33,
+            "factoryCodes": [],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Body Coloured Bumpers",
+            "genericName": "Body Styling",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "876"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Body Coloured Door Mirrors",
+            "genericName": "Door Mirrors",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "5J8",
+                "976"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Bossa Nova White",
+            "genericName": "White",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "268"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Solid",
+            "finish": "Pastel",
+            "factoryFitted": true
+        },
+        {
+            "name": "Climate Control - Automatic Monozone",
+            "genericName": "Climate Control",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "140"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Cloth - Black-Blue with Black Ambience",
+            "genericName": "Cloth",
+            "type": "Optional",
+            "category": "Upholstery",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "725"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Cloth - Black-Red with Black Ambience",
+            "genericName": "Cloth",
+            "type": "Optional",
+            "category": "Upholstery",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "724"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": true
+        },
+        {
+            "name": "Countrypolitan Yellow",
+            "genericName": "Yellow",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 250.0,
+            "vatPrice": 50.0,
+            "factoryCodes": [
+                "712"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Special Solid Paint",
+            "finish": "Special Pastel",
+            "factoryFitted": false
+        },
+        {
+            "name": "Crossover Black",
+            "genericName": "Black",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 383.33,
+            "vatPrice": 76.67,
+            "factoryCodes": [
+                "5CE-876",
+                "876"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Metallic",
+            "finish": "Metallic",
+            "factoryFitted": false
+        },
+        {
+            "name": "Dark Tinted Rear Windows",
+            "genericName": "Windows - Privacy Glass",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "070"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Daytime Running Lights",
+            "genericName": "Daytime Running Lights",
+            "type": "Standard",
+            "category": "Illumination",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "692"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Door Handles - Chrome",
+            "genericName": "Door Mirrors",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "5IX",
+                "7K"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Door Mirrors - Satin Finish",
+            "genericName": "Door Mirrors",
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 62.5,
+            "vatPrice": 12.5,
+            "factoryCodes": [],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Drivers Knee Airbag",
+            "genericName": "Airbags - Knee",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "150"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Dualdrive Power Steering",
+            "genericName": "Power Assisted Steering",
+            "type": "Standard",
+            "category": "Performance",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "112",
+                "114"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "EBD - Electronic Brakeforce Distribution",
+            "genericName": "EBD - Electronic Brakeforce Distribution",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "Y08"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "ESP - Electronic Stability Programme",
+            "genericName": "ESP - Electronic Stability Programme",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "392"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Electric Front Windows",
+            "genericName": "Front Electric Windows",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "028"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Electric Sunroof",
+            "genericName": "Electric Sunroof",
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 483.33,
+            "vatPrice": 96.67,
+            "factoryCodes": [
+                "400"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": "High Value",
+            "factoryFitted": false
+        },
+        {
+            "name": "Electrically Adjustable Heated Door Mirrors",
+            "genericName": "Door Mirrors - Heated",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "041",
+                "KLH"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Electrochromatic Rear View Mirror",
+            "genericName": "Auto Dimming Rear View Mirror",
+            "type": "Optional",
+            "category": "Interior",
+            "basicPrice": 91.67,
+            "vatPrice": 18.33,
+            "factoryCodes": [
+                "410",
+                "Y2E"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Electroclash Grey",
+            "genericName": "Grey",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 383.33,
+            "vatPrice": 76.67,
+            "factoryCodes": [
+                "695"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Metallic",
+            "finish": "Metallic",
+            "factoryFitted": false
+        },
+        {
+            "name": "Electronica Blue",
+            "genericName": "Blue",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 383.33,
+            "vatPrice": 76.67,
+            "factoryCodes": [
+                "61Q"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Metallic",
+            "finish": "Metallic",
+            "factoryFitted": false
+        },
+        {
+            "name": "Exterior Temperature Sensor",
+            "genericName": "Driver Information",
+            "type": "Standard",
+            "category": "Drivers Assistance",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "5BY"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Fix and Go Puncture Repair Kit",
+            "genericName": "Tyre Repair Kit (inc Sealant/Foam Kit)",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "499"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Fixed Glass Roof with Sunblind",
+            "genericName": "Panoramic Sunroof - Fixed",
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 266.67,
+            "vatPrice": 53.33,
+            "factoryCodes": [
+                "59E"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Fog Lights",
+            "genericName": "Front Fog Lights",
+            "type": "Standard",
+            "category": "Illumination",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "097",
+                "LNJ"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "GSI - Gear Shift Indicator",
+            "genericName": "Driver Information",
+            "type": "Standard",
+            "category": "Drivers Assistance",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Gear Knob - Ivory",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "4VU"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Gear knob - Specific - S",
+            "genericName": null,
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Grab Handle",
+            "genericName": "Grab Handles",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "890"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Groove Metal Grey",
+            "genericName": "Grey",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 383.33,
+            "vatPrice": 76.67,
+            "factoryCodes": [
+                "372"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Metallic",
+            "finish": "Metallic",
+            "factoryFitted": false
+        },
+        {
+            "name": "Height Adjustable Drivers Seat",
+            "genericName": "Seats - Manual Adjustable",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "450",
+                "626"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Hi-Fi Sound System with Subwoofer",
+            "genericName": "Audio & Communication",
+            "type": "Optional",
+            "category": "Audio and Communications",
+            "basicPrice": 225.0,
+            "vatPrice": 45.0,
+            "factoryCodes": [],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Hill Holder",
+            "genericName": "Hill Start Assistance",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "056"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Leather - Black-Red Fabric Insert with Black Ambience",
+            "genericName": "Leather",
+            "type": "Optional",
+            "category": "Upholstery",
+            "basicPrice": 650.0,
+            "vatPrice": 130.0,
+            "factoryCodes": [
+                "598"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": "High Value",
+            "factoryFitted": false
+        },
+        {
+            "name": "Locking Wheel Nuts",
+            "genericName": "Locking Wheel Bolts",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "5JM"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "MSR - Motor Slip Regulation",
+            "genericName": "Traction Control",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "New Age Cream",
+            "genericName": "Beige",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 250.0,
+            "vatPrice": 50.0,
+            "factoryCodes": [
+                "231"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Special Solid Paint",
+            "finish": "Special Pastel",
+            "factoryFitted": false
+        },
+        {
+            "name": "Pasodoble Red",
+            "genericName": "Red",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 250.0,
+            "vatPrice": 50.0,
+            "factoryCodes": [
+                "111",
+                "5CJ-111"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Special Solid Paint",
+            "finish": "Special Pastel",
+            "factoryFitted": false
+        },
+        {
+            "name": "Radio-CD and MP3 Player",
+            "genericName": "CD Player",
+            "type": "Standard",
+            "category": "Audio and Communications",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "414",
+                "717"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Rear Parking Sensors",
+            "genericName": "Parking Assistance - Rear Sensor",
+            "type": "Standard",
+            "category": "Drivers Assistance",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "508"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Remote Central Locking",
+            "genericName": "Remote Central Locking",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "008"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Roof - Black Chequered",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 133.33,
+            "vatPrice": 26.67,
+            "factoryCodes": [
+                "5HF"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Roof - Italian Flag Stripe with 500",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 116.67,
+            "vatPrice": 23.33,
+            "factoryCodes": [
+                "5H0"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Roof - White Chequered",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 133.33,
+            "vatPrice": 26.67,
+            "factoryCodes": [
+                "5HH"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Satin Detail",
+            "genericName": null,
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Seats - Passengers Memory Function",
+            "genericName": "Seats - Memory",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "4GQ"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Seats - Sports",
+            "genericName": "Seats - Sport",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Seats-back Pockets",
+            "genericName": "Storage",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "339",
+                "CSM"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Side Stripe - Black",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 116.67,
+            "vatPrice": 23.33,
+            "factoryCodes": [
+                "5H6"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Side Stripe - Italian Flag",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 116.67,
+            "vatPrice": 23.33,
+            "factoryCodes": [
+                "5HE"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Side Stripe - Red",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 116.67,
+            "vatPrice": 23.33,
+            "factoryCodes": [
+                "5H4"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Side Stripe - White",
+            "genericName": null,
+            "type": "Optional",
+            "category": "Exterior",
+            "basicPrice": 116.67,
+            "vatPrice": 23.33,
+            "factoryCodes": [
+                "5H5"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Smoking Kit",
+            "genericName": "Ashtray & Cigarette Lighter",
+            "type": "Optional",
+            "category": "Interior",
+            "basicPrice": 37.5,
+            "vatPrice": 7.5,
+            "factoryCodes": [
+                "665",
+                "989"
+            ],
+            "rarityRating": "Very Rare",
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Space Saver Spare Wheel",
+            "genericName": "Wheels - Spare Wheel - Space Saver",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "803"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Split Folding 50:50 Rear Seat",
+            "genericName": null,
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "195"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Sports Kit",
+            "genericName": null,
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "618"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Steering Wheel - Black",
+            "genericName": "Safety Equipment",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Steering Wheel - Height Adjustment",
+            "genericName": "Steering Column Adjustable - Rake",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "011"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Steering Wheel - Ivory",
+            "genericName": "Safety Equipment",
+            "type": "Optional",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": false
+        },
+        {
+            "name": "Steering Wheel - Leather/Sports Abarth",
+            "genericName": "Steering Wheel - Leather",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "6BQ"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Steering Wheel Audio Controls",
+            "genericName": "Steering Wheel - Multifunction",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "245",
+                "5BH"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Storage Under Passenger Seat",
+            "genericName": "Storage",
+            "type": "Standard",
+            "category": "Interior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "295"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "TFT Screen - Colour 7in",
+            "genericName": "Display Screen - Front Colour",
+            "type": "Standard",
+            "category": "Audio and Communications",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "4GF"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Tech House Grey",
+            "genericName": "Grey",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 250.0,
+            "vatPrice": 50.0,
+            "factoryCodes": [
+                "735"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Special Solid Paint",
+            "finish": "Special Pastel",
+            "factoryFitted": false
+        },
+        {
+            "name": "Thermal Windows",
+            "genericName": "Windows",
+            "type": "Standard",
+            "category": "Exterior",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "030"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Tyre Pressure Monitor System",
+            "genericName": "Tyre Pressure Monitoring System",
+            "type": "Standard",
+            "category": "Drivers Assistance",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "365",
+                "5YB",
+                "7B2"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "USB Port",
+            "genericName": "USB",
+            "type": "Standard",
+            "category": "Audio and Communications",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "RS6"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Urban White",
+            "genericName": "White",
+            "type": "Optional",
+            "category": "Paint",
+            "basicPrice": 616.67,
+            "vatPrice": 123.33,
+            "factoryCodes": [
+                "61P"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "genericFinish": "Pearlescent",
+            "finish": "Pearlescent",
+            "factoryFitted": false
+        },
+        {
+            "name": "Voice Recognition",
+            "genericName": "Voice Control",
+            "type": "Standard",
+            "category": "Drivers Assistance",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        },
+        {
+            "name": "Window Airbags",
+            "genericName": "Airbags - Curtain",
+            "type": "Standard",
+            "category": "Safety and Security",
+            "basicPrice": 0.0,
+            "vatPrice": 0.0,
+            "factoryCodes": [
+                "614"
+            ],
+            "rarityRating": null,
+            "valueRating": null,
+            "factoryFitted": null
+        }
+    ],
+    "motTests": [
+        {
+            "completedDate": "2024-12-12T12:01:22Z",
+            "expiryDate": "2025-12-20",
+            "testResult": "Passed",
+            "odometerValue": 37010,
+            "odometerUnit": "Miles",
+            "motTestNumber": "157427795102",
+            "rfrAndComments": [
+                {
+                    "type": "Advisory",
+                    "text": "Offside Front Tyre wearing low on inner 195/45/16",
+                    "dangerous": false
+                },
+                {
+                    "type": "Advisory",
+                    "text": "Rear axle corroded",
+                    "dangerous": false
+                }
+            ]
+        },
+        {
+            "completedDate": "2023-12-13T16:50:12Z",
+            "expiryDate": "2024-12-20",
+            "testResult": "Passed",
+            "odometerValue": 30793,
+            "odometerUnit": "Miles",
+            "motTestNumber": "176913172023",
+            "rfrAndComments": []
+        },
+        {
+            "completedDate": "2023-12-13T09:59:55Z",
+            "expiryDate": null,
+            "testResult": "Failed",
+            "odometerValue": 30790,
+            "odometerUnit": "Miles",
+            "motTestNumber": "140822059577",
+            "rfrAndComments": [
+                {
+                    "type": "Advisory",
+                    "text": "Nearside Rear Shock absorbers has a slightly worn bush (5.3.2 (c))",
+                    "dangerous": false
+                },
+                {
+                    "type": "MAJOR",
+                    "text": "Offside Front Shock absorbers has a serious fluid leak (5.3.2 (b))",
+                    "dangerous": false
+                },
+                {
+                    "type": "MAJOR",
+                    "text": "Offside Front Suspension arm ball joint excessively worn (5.3.4 (a) (i))",
+                    "dangerous": false
+                },
+                {
+                    "type": "MAJOR",
+                    "text": "Offside Rear Shock absorbers has an excessively worn bush (5.3.2 (c))",
+                    "dangerous": false
+                }
+            ]
+        },
+        {
+            "completedDate": "2022-12-21T16:32:05Z",
+            "expiryDate": "2023-12-20",
+            "testResult": "Passed",
+            "odometerValue": 23367,
+            "odometerUnit": "Miles",
+            "motTestNumber": "858742917753",
+            "rfrAndComments": []
+        },
+        {
+            "completedDate": "2022-02-22T13:11:18Z",
+            "expiryDate": "2023-02-21",
+            "testResult": "Passed",
+            "odometerValue": 21892,
+            "odometerUnit": "Miles",
+            "motTestNumber": "658612680853",
+            "rfrAndComments": []
+        },
+        {
+            "completedDate": "2021-02-19T14:03:06Z",
+            "expiryDate": "2022-02-18",
+            "testResult": "Passed",
+            "odometerValue": 19404,
+            "odometerUnit": "Miles",
+            "motTestNumber": "112340936971",
+            "rfrAndComments": []
+        },
+        {
+            "completedDate": "2020-02-18T16:41:58Z",
+            "expiryDate": "2021-02-17",
+            "testResult": "Passed",
+            "odometerValue": 17342,
+            "odometerUnit": "Miles",
+            "motTestNumber": "124632909556",
+            "rfrAndComments": []
+        },
+        {
+            "completedDate": "2018-11-07T10:21:04Z",
+            "expiryDate": "2019-11-29",
+            "testResult": "Passed",
+            "odometerValue": 11315,
+            "odometerUnit": "Miles",
+            "motTestNumber": "997480159567",
+            "rfrAndComments": []
+        }
+    ],
+    "valuations": {
+        "retail": {
+            "amountGBP": 6650,
+            "amountExcludingVatGBP": null,
+            "amountNoVatGBP": null
+        },
+        "partExchange": {
+            "amountGBP": 5208,
+            "amountExcludingVatGBP": null,
+            "amountNoVatGBP": null
+        },
+        "trade": {
+            "amountGBP": 5306,
+            "amountExcludingVatGBP": null,
+            "amountNoVatGBP": null
+        },
+        "private": {
+            "amountGBP": 6440
+        }
+    },
+    "vehicleMetrics": {
+        "retail": {
+            "supply": {
+                "value": 24.71
+            },
+            "demand": {
+                "value": 24.71
+            },
+            "marketCondition": {
+                "value": 0.0
+            },
+            "rating": {
+                "value": 82.11
+            },
+            "daysToSell": {
+                "value": 39.3
+            },
+            "locations": []
+        }
+    }
+}  </script>
+  <script>
+    (function () {
+      const data = JSON.parse(document.getElementById("carData").textContent);
+      const { vehicle, history, motTests, valuations, features } = data;
+
+      const fmtCurrency = (n) => n == null ? "N/A" : new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(n);
+      const fmtNum = (n) => n == null ? "N/A" : new Intl.NumberFormat("en-GB").format(n);
+      const fmtDate = (v) => {
+        if (!v) return "N/A";
+        const d = new Date(v);
+        if (Number.isNaN(d.getTime())) return "N/A";
+        return new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" }).format(d);
+      };
+
+      const latestMot = [...(motTests || [])].sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))[0];
+
+      const setText = (id, text) => {
+        const node = document.getElementById(id);
+        if (node) node.textContent = text;
+      };
+
+      setText("title", `${vehicle.make} ${vehicle.model} ${vehicle.trim || ""}`.trim());
+      setText("subtitle", `${vehicle.derivative} | ${vehicle.firstRegistrationDate ? new Date(vehicle.firstRegistrationDate).getFullYear() : "Unknown Year"}`);
+      setText("plate", vehicle.registration || "No Plate");
+
+      const chips = [
+        { text: vehicle.ownershipCondition || "Unknown Condition", cls: "" },
+        { text: vehicle.fuelType || "Unknown Fuel", cls: "" },
+        { text: vehicle.transmissionType || "Unknown Gearbox", cls: "" },
+        { text: history.scrapped ? "Scrapped" : "Not Scrapped", cls: history.scrapped ? "bad" : "ok" },
+        { text: history.stolen ? "Stolen Marker" : "No Stolen Marker", cls: history.stolen ? "bad" : "ok" },
+        { text: history.imported ? "Imported" : "Not Imported", cls: history.imported ? "" : "ok" }
+      ];
+      document.getElementById("statusChips").innerHTML = chips.map((chip) => `<span class="chip ${chip.cls}">${chip.text}</span>`).join("");
+
+      const kpis = [
+        ["Retail", fmtCurrency(valuations?.retail?.amountGBP)],
+        ["Private", fmtCurrency(valuations?.private?.amountGBP)],
+        ["Part Exchange", fmtCurrency(valuations?.partExchange?.amountGBP)],
+        ["Latest Mileage", latestMot ? `${fmtNum(latestMot.odometerValue)} ${latestMot.odometerUnit}` : "N/A"],
+        ["MOT Status", latestMot ? latestMot.testResult : "N/A"],
+        ["MOT Expiry", latestMot ? fmtDate(latestMot.expiryDate) : "N/A"],
+        ["Owners", fmtNum(vehicle.owners)],
+        ["Road Tax", fmtCurrency(vehicle.vehicleExciseDutyWithoutSupplementGBP)]
+      ];
+      document.getElementById("kpis").innerHTML = kpis.map(([label, value]) => `<article class="kpi"><p class="kpi-label">${label}</p><p class="kpi-value">${value}</p></article>`).join("");
+
+      const specs = [
+        ["VIN", vehicle.vin],
+        ["Engine", `${vehicle.badgeEngineSizeLitres || ""}L / ${fmtNum(vehicle.enginePowerBHP)} bhp`],
+        ["Engine Capacity", `${fmtNum(vehicle.engineCapacityCC)} cc`],
+        ["0-100 km/h", vehicle.zeroToOneHundredKMPHSeconds ? `${vehicle.zeroToOneHundredKMPHSeconds}s` : "N/A"],
+        ["Top Speed", vehicle.topSpeedMPH ? `${vehicle.topSpeedMPH} mph` : "N/A"],
+        ["CO2", vehicle.co2EmissionGPKM ? `${vehicle.co2EmissionGPKM} g/km` : "N/A"],
+        ["Combined MPG", vehicle.fuelEconomyNEDCCombinedMPG ? `${vehicle.fuelEconomyNEDCCombinedMPG} mpg` : "N/A"],
+        ["Emission Class", vehicle.emissionClass],
+        ["Body", `${vehicle.bodyType || "N/A"}, ${vehicle.doors || "?"} doors, ${vehicle.seats || "?"} seats`],
+        ["Drivetrain", vehicle.drivetrain],
+        ["Dimensions", `${fmtNum(vehicle.lengthMM)} x ${fmtNum(vehicle.widthMM)} x ${fmtNum(vehicle.heightMM)} mm`],
+        ["Fuel Tank", vehicle.fuelCapacityLitres ? `${vehicle.fuelCapacityLitres} L` : "N/A"]
+      ];
+      document.getElementById("specs").innerHTML = specs.map(([label, value]) => `<article class="spec-item"><p class="spec-label">${label}</p><p class="spec-value">${value || "N/A"}</p></article>`).join("");
+
+      const valuationRows = [
+        ["Retail", valuations?.retail?.amountGBP],
+        ["Private", valuations?.private?.amountGBP],
+        ["Trade", valuations?.trade?.amountGBP],
+        ["Part Exchange", valuations?.partExchange?.amountGBP]
+      ];
+      document.getElementById("valuations").innerHTML = valuationRows.map(([label, amount]) => `<article class="spec-item"><p class="spec-label">${label}</p><p class="spec-value">${fmtCurrency(amount)}</p></article>`).join("");
+
+      const historyRows = [
+        ["First Registered", fmtDate(vehicle.firstRegistrationDate)],
+        ["Year of Manufacture", history.yearOfManufacture || "N/A"],
+        ["Current Colour", vehicle.oem?.colour || vehicle.colour || "N/A"],
+        ["Previous Owners", history.previousOwners],
+        ["Latest Keeper Change", fmtDate(history?.keeperChanges?.[0]?.dateOfLastKeeper)],
+        ["Latest V5C Issued", fmtDate(history?.v5cs?.[0]?.issuedDate)],
+        ["Imported", history.imported ? "Yes" : "No"],
+        ["Exported", history.exported ? "Yes" : "No"],
+        ["Scrapped", history.scrapped ? "Yes" : "No"],
+        ["Stolen Marker", history.stolen ? "Yes" : "No"]
+      ];
+      document.getElementById("history").innerHTML = historyRows.map(([label, value]) => `<article class="spec-item"><p class="spec-label">${label}</p><p class="spec-value">${value ?? "N/A"}</p></article>`).join("");
+
+      const motList = [...(motTests || [])].sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate));
+      document.getElementById("motTimeline").innerHTML = motList.map((test) => {
+        const comments = (test.rfrAndComments || []).map((c) => `<li>${c.type}: ${c.text}</li>`).join("");
+        const statusClass = test.testResult && test.testResult.toLowerCase() === "passed" ? "pass" : "fail";
+        return `<li><div class="row"><strong>${fmtDate(test.completedDate)}</strong><span class="badge ${statusClass}">${test.testResult || "Unknown"}</span></div><div class="row"><span>${fmtNum(test.odometerValue)} ${test.odometerUnit || ""}</span><span>Expires: ${fmtDate(test.expiryDate)}</span></div>${comments ? `<ul class="notes">${comments}</ul>` : ""}</li>`;
+      }).join("");
+
+      const grouped = (features || []).reduce((acc, feature) => {
+        const key = feature.category || "Other";
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(feature);
+        return acc;
+      }, {});
+
+      document.getElementById("features").innerHTML = Object.entries(grouped)
+        .sort((a, b) => b[1].length - a[1].length)
+        .map(([category, list], index) => {
+          const std = list.filter((f) => (f.type || "").toLowerCase() === "standard").length;
+          const opt = list.filter((f) => (f.type || "").toLowerCase() === "optional").length;
+          const items = list
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((f) => {
+              const badges = [f.type, f.rarityRating, f.valueRating].filter(Boolean).join(" | ");
+              return `<li class="feature-item"><p class="feature-name">${f.name}</p><p class="feature-meta">${badges || "No extra metadata"}</p></li>`;
+            })
+            .join("");
+          return `<details ${index < 3 ? "open" : ""}><summary><span>${category}</span><span class="summary-meta">${list.length} total | ${std} standard | ${opt} optional</span></summary><ul class="feature-list">${items}</ul></details>`;
+        })
+        .join("");
+    })();
+  </script>
+</body>
+</html>
