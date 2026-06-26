@@ -487,6 +487,22 @@ footer {
 
 .footer-links a:hover { color: var(--orange); }
 
+.footer-secondary {
+  width: 100%;
+  text-align: right;
+  margin-top: -10px;
+}
+
+.footer-secondary a {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3b342d;
+  transition: color 0.2s;
+}
+
+.footer-secondary a:hover { color: var(--orange); }
+
 .footer-note {
   width: 100%;
   text-align: center;
