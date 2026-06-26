@@ -14,14 +14,14 @@
 	<meta property="og:title" content="Billions Calculator - £1 Per Second">
 	<meta property="og:description" content="See how long it would take to reach a target amount at £1 per second.">
 	<meta property="og:url" content="https://adrianclarke.dev/calculator/billions.html">
+	<meta property="og:image" content="https://adrianclarke.dev/assets/images/avatar-brick-square.jpg">
 	<meta property="og:image:width" content="920">
 	<meta property="og:image:height" content="920">
-	<meta property="og:image:alt" content="£1 Per Second Calculator">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="£1 Per Second Calculator">
+	<meta name="twitter:title" content="Billions Calculator - £1 Per Second">
 	<meta name="twitter:description" content="See how long it would take to reach a target amount at £1 per second.">
 	<meta name="twitter:image" content="https://adrianclarke.dev/assets/images/avatar-brick-square.jpg">
-	<title>£1 Per Second Calculator</title>
+	<title>Billions Calculator - £1 Per Second</title>
 	<link rel="icon" type="image/x-icon" href="/favicon-v2.ico">
 	<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32-v2.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16-v2.png">
@@ -34,142 +34,6 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	<script src="/js/theme.js"></script>
-
-	<style>
-		.sr-only {
-			position: absolute;
-			width: 1px;
-			height: 1px;
-			padding: 0;
-			margin: -1px;
-			overflow: hidden;
-			clip: rect(0, 0, 0, 0);
-			white-space: nowrap;
-			border: 0;
-		}
-
-		.calc-shell {
-			max-width: 1140px;
-			margin: 0 auto;
-			background: var(--cream);
-			padding: 72px 48px 96px;
-			min-height: calc(100vh - 64px);
-		}
-
-		.calc-wrap {
-			max-width: 760px;
-			margin: 0 auto;
-			border: 1px solid var(--border);
-			border-radius: 10px;
-			padding: 40px;
-			background: #fff;
-			box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
-		}
-
-		.calc-overline {
-			font-family: 'Geist', sans-serif;
-			font-size: 0.75rem;
-			letter-spacing: 0.14em;
-			text-transform: uppercase;
-			color: var(--muted);
-			margin-bottom: 8px;
-		}
-
-		.calc-title {
-			font-family: 'Barlow', sans-serif;
-			font-size: clamp(2rem, 4vw, 3rem);
-			line-height: 1.05;
-			letter-spacing: -0.02em;
-			color: var(--dark);
-			margin-bottom: 10px;
-		}
-
-		.calc-title em {
-			color: var(--orange);
-			font-style: italic;
-		}
-
-		.calc-copy {
-			color: var(--mid);
-			font-size: 1rem;
-			margin-bottom: 24px;
-		}
-
-		.calc-form {
-			display: grid;
-			grid-template-columns: 1fr auto;
-			gap: 12px;
-			margin-bottom: 24px;
-		}
-
-		.calc-input {
-			width: 100%;
-			border: 1px solid var(--border);
-			border-radius: 6px;
-			padding: 14px 16px;
-			font-size: 1rem;
-			color: var(--dark);
-			font-family: var(--mono);
-			background: #fff;
-		}
-
-		.calc-input:focus {
-			outline: 2px solid rgba(235, 73, 16, 0.3);
-			border-color: var(--orange);
-		}
-
-		.calc-btn {
-			border: none;
-			border-radius: 6px;
-			background: var(--orange);
-			color: #fff;
-			font-family: 'Barlow', sans-serif;
-			font-weight: 600;
-			letter-spacing: 0.04em;
-			padding: 0 20px;
-			cursor: pointer;
-		}
-
-		.calc-btn:hover {
-			background: #d03e0c;
-		}
-
-		.calc-result {
-			border-top: 1px solid var(--border);
-			padding-top: 20px;
-		}
-
-		.result-main {
-			font-family: 'Barlow', sans-serif;
-			font-size: clamp(1.4rem, 3vw, 2rem);
-			line-height: 1.2;
-			color: var(--dark);
-			margin-bottom: 8px;
-		}
-
-		.result-sub {
-			color: var(--muted);
-			font-size: 0.95rem;
-		}
-
-		@media (max-width: 720px) {
-			.calc-shell {
-				padding: 36px 16px 56px;
-			}
-
-			.calc-wrap {
-				padding: 24px;
-			}
-
-			.calc-form {
-				grid-template-columns: 1fr;
-			}
-
-			.calc-btn {
-				min-height: 48px;
-			}
-		}
-	</style>
 
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LLWCJ0BKT0"></script>
 	<script>
@@ -192,6 +56,7 @@
 			</p>
 
 			<form id="seconds-form" class="calc-form" novalidate>
+				<label class="sr-only" for="target-number">Target amount in pounds</label>
 				<input
 					id="target-number"
 					class="calc-input"
