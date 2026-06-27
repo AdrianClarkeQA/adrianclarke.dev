@@ -55,6 +55,13 @@
 				If someone gave you £1 every second, how long would it take to reach a specific amount? This is an exercise to show how bad humans are at understanding very large numbers.
 			</p>
 
+			<div class="calc-presets" role="group" aria-label="Quick amounts">
+				<button type="button" class="preset-btn" data-value="1000000">£1 million</button>
+				<button type="button" class="preset-btn" data-value="1000000000">£1 billion</button>
+				<button type="button" class="preset-btn" data-value="100000000000">£100 billion</button>
+				<button type="button" class="preset-btn" data-value="1000000000000">£1 trillion</button>
+			</div>
+
 			<form id="seconds-form" class="calc-form" novalidate>
 				<label class="sr-only" for="target-number">Target amount in pounds</label>
 				<input
@@ -64,15 +71,41 @@
 					inputmode="numeric"
 					pattern="[0-9]*"
 					autocomplete="off"
-					placeholder="Try 1000000 or 1000000000"
+					placeholder="Enter any amount…"
 					aria-describedby="result-sub"
 				>
 				<button type="submit" class="calc-btn">Calculate</button>
 			</form>
 
+			<p id="input-preview" class="input-preview" aria-live="polite"></p>
+
 			<div class="calc-result" aria-live="polite">
 				<p id="result-main" class="result-main">Enter an amount to begin.</p>
 				<p id="result-sub" class="result-sub">At £1 per second, £1,000,000 takes about 11.6 days.</p>
+
+				<div id="calc-breakdown" class="calc-breakdown" hidden>
+					<div class="breakdown-unit">
+						<div id="bd-years" class="breakdown-value">0</div>
+						<div class="breakdown-label">Years</div>
+					</div>
+					<div class="breakdown-unit">
+						<div id="bd-months" class="breakdown-value">0</div>
+						<div class="breakdown-label">Months</div>
+					</div>
+					<div class="breakdown-unit">
+						<div id="bd-days" class="breakdown-value">0</div>
+						<div class="breakdown-label">Days</div>
+					</div>
+					<div class="breakdown-unit">
+						<div id="bd-hours" class="breakdown-value">0</div>
+						<div class="breakdown-label">Hours</div>
+					</div>
+				</div>
+
+				<div id="calc-comparisons" class="calc-comparisons" hidden>
+					<p class="comparisons-header">Real-world context</p>
+					<ul id="comparison-list" class="comparison-list"></ul>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -82,27 +115,32 @@
 
 	<script>
 		(function () {
-			var form = document.getElementById('seconds-form');
-			var input = document.getElementById('target-number');
-			var resultMain = document.getElementById('result-main');
-			var resultSub = document.getElementById('result-sub');
+			var form        = document.getElementById('seconds-form');
+			var input       = document.getElementById('target-number');
+			var resultMain  = document.getElementById('result-main');
+			var resultSub   = document.getElementById('result-sub');
+			var inputPreview   = document.getElementById('input-preview');
+			var breakdownEl    = document.getElementById('calc-breakdown');
+			var comparisonsEl  = document.getElementById('calc-comparisons');
+			var compList       = document.getElementById('comparison-list');
+			var presetBtns     = document.querySelectorAll('.preset-btn');
 
-			var SECOND = 1;
-			var DAY = 86400;
-			var MONTH = 2629800;
-			var YEAR = 31557600;
+			var HOUR  = 3600;
+			var DAY   = 86400;
+			var MONTH = 2629800;   // average month (365.25 / 12 * 86400)
+			var YEAR  = 31557600;  // average year  (365.25 * 86400)
+
+			var UK_SALARY    = 35000;
+			var UK_HOUSE     = 285000;
+			var NHS_ANNUAL   = 180e9;
+			var CURRENT_YEAR = 2026;
 
 			function chooseBestUnit(seconds) {
-				if (seconds >= YEAR) {
-					return { unit: 'year', value: seconds / YEAR };
-				}
-				if (seconds >= MONTH) {
-					return { unit: 'month', value: seconds / MONTH };
-				}
-				if (seconds >= DAY) {
-					return { unit: 'day', value: seconds / DAY };
-				}
-				return { unit: 'second', value: seconds / SECOND };
+				if (seconds >= YEAR)  return { unit: 'year',   value: seconds / YEAR };
+				if (seconds >= MONTH) return { unit: 'month',  value: seconds / MONTH };
+				if (seconds >= DAY)   return { unit: 'day',    value: seconds / DAY };
+				if (seconds >= HOUR)  return { unit: 'hour',   value: seconds / HOUR };
+				return { unit: 'second', value: seconds };
 			}
 
 			function pluralize(unit, value) {
@@ -125,14 +163,141 @@
 
 			function parseInput(raw) {
 				var normalized = raw.replace(/,/g, '').trim();
-				if (!normalized) {
-					return NaN;
-				}
+				if (!normalized) return NaN;
 				return Number(normalized);
 			}
 
 			function sanitizeToDigits(raw) {
 				return raw.replace(/\D/g, '');
+			}
+
+			function fullBreakdown(seconds) {
+				var years  = Math.floor(seconds / YEAR);
+				var rem    = seconds - years * YEAR;
+				var months = Math.floor(rem / MONTH);
+				rem        = rem - months * MONTH;
+				var days   = Math.floor(rem / DAY);
+				rem        = rem - days * DAY;
+				var hours  = Math.floor(rem / HOUR);
+				return { years: years, months: months, days: days, hours: hours };
+			}
+
+			function getHistoricalEra(year) {
+				if (year >= 2020) return 'just a few years ago';
+				if (year >= 2010) return 'the rise of smartphones and social media';
+				if (year >= 2000) return 'the dot-com boom';
+				if (year >= 1990) return 'when the World Wide Web was invented';
+				if (year >= 1980) return 'the Thatcher and Reagan era';
+				if (year >= 1969) return 'the Moon landings';
+				if (year >= 1945) return 'just after the Second World War';
+				if (year >= 1939) return 'the outbreak of the Second World War';
+				if (year >= 1914) return 'the outbreak of the First World War';
+				if (year >= 1837) return 'the Victorian era';
+				if (year >= 1760) return 'the Industrial Revolution';
+				if (year >= 1215) return 'the Magna Carta era';
+				if (year >= 1066) return 'just after the Norman Conquest';
+				if (year >= 793)  return 'the Viking age';
+				if (year >= 476)  return 'the fall of the Western Roman Empire';
+				return 'the height of the Roman Empire';
+			}
+
+			function getHistoricalEraBC(yearsBC) {
+				if (yearsBC < 500)    return 'Classical Greece';
+				if (yearsBC < 3000)   return 'the Bronze Age, when the pyramids were built';
+				if (yearsBC < 10000)  return 'the dawn of agriculture';
+				if (yearsBC < 40000)  return 'when modern humans first arrived in Europe';
+				if (yearsBC < 200000) return 'the early days of Homo sapiens';
+				return 'long before modern humans existed';
+			}
+
+			function getLightYearRef(ly) {
+				if (ly < 4.24)   return 'almost reaching our nearest star, Proxima Centauri (4.24 ly)';
+				if (ly < 8.6)    return 'past Proxima Centauri, heading towards Sirius — the brightest star in the sky (8.6 ly)';
+				if (ly < 25)     return 'past Sirius, through a region of dozens of known star systems';
+				if (ly < 51)     return 'reaching Vega (25 ly) and 51 Pegasi (51 ly) — the first star found to host an exoplanet';
+				if (ly < 1340)   return 'deep into our stellar neighbourhood — thousands of stars in every direction';
+				if (ly < 26000)  return 'across a substantial portion of the Milky Way galaxy';
+				if (ly < 52000)  return 'past the galactic centre and into the far side of the Milky Way';
+				return 'beyond the Milky Way galaxy entirely';
+			}
+
+			function getComparisons(amount) {
+				var items = [];
+
+				// 1. Salary
+				var salaryYears = amount / UK_SALARY;
+				if (salaryYears < 1 / 52) {
+					items.push('Equivalent to <strong>' + formatNumber(salaryYears * 365, 1) + ' days</strong> of average UK salary (£35,000/yr)');
+				} else if (salaryYears < 1) {
+					items.push('Equivalent to <strong>' + formatNumber(salaryYears * 12, 1) + ' months</strong> of average UK salary (£35,000/yr)');
+				} else {
+					var salaryNote = salaryYears >= 100 ? ' — non-stop, with no days off, ever' : '';
+					items.push('Equivalent to <strong>' + formatNumber(salaryYears, 1) + ' years</strong> of average UK salary (£35,000/yr)' + salaryNote);
+				}
+
+				// 2. UK homes
+				var homes = amount / UK_HOUSE;
+				if (homes < 0.1) {
+					items.push('Covers <strong>' + formatNumber(homes * 100, 1) + '%</strong> of an average UK home\'s asking price (£285,000)');
+				} else if (homes < 1) {
+					items.push('Covers <strong>' + formatNumber(homes * 100, 0) + '%</strong> of an average UK home\'s asking price (£285,000)');
+				} else {
+					var homeCount = Math.round(homes);
+					var homeSuffix = homeCount === 1 ? 'home' : 'homes';
+					var homeNote   = homeCount >= 1000 ? ' — outright, no mortgages' : '';
+					items.push('Could buy <strong>' + formatNumber(homeCount, 0) + ' average UK ' + homeSuffix + '</strong> at £285,000 each' + homeNote);
+				}
+
+				// 3. Historical context — amount of pounds = amount of seconds
+				if (amount >= YEAR) {
+					var yearsBack  = amount / YEAR;
+					var yearCalc   = Math.round(CURRENT_YEAR - yearsBack);
+					if (yearCalc > 0) {
+						var era = getHistoricalEra(yearCalc);
+						items.push('If you started counting £1/sec in <strong>' + yearCalc + '</strong> you\'d finish right now — ' + era);
+					} else {
+						var yearsBC = Math.abs(yearCalc) + 1;
+						var eraBC   = getHistoricalEraBC(yearsBC);
+						items.push('If you started counting £1/sec in <strong>' + formatNumber(yearsBC, 0) + ' BCE</strong> you\'d finish right now — ' + eraBC);
+					}
+				}
+
+				// 4. NHS budget (>= £1B)
+				if (amount >= 1e9) {
+					var nhsDays = (amount / NHS_ANNUAL) * 365;
+					if (nhsDays >= 1) {
+						items.push('Could fund the entire NHS for <strong>' + formatNumber(nhsDays, nhsDays < 10 ? 1 : 0) + ' days</strong> (full annual budget is ~£180B)');
+					}
+				}
+
+				// 5. Light-travel distance (>= £1B — gives >= 31 light-years)
+				if (amount >= 1e9) {
+					var lightYears = (amount * 299792) / 9.461e12;
+					items.push('In that time, light travels <strong>' + formatNumber(lightYears, lightYears < 10 ? 1 : 0) + ' light-years</strong> — ' + getLightYearRef(lightYears));
+				}
+
+				return items;
+			}
+
+			function renderBreakdown(seconds) {
+				if (seconds < DAY) { breakdownEl.hidden = true; return; }
+				var bd = fullBreakdown(seconds);
+				document.getElementById('bd-years').textContent  = formatNumber(bd.years,  0);
+				document.getElementById('bd-months').textContent = formatNumber(bd.months, 0);
+				document.getElementById('bd-days').textContent   = formatNumber(bd.days,   0);
+				document.getElementById('bd-hours').textContent  = formatNumber(bd.hours,  0);
+				breakdownEl.hidden = false;
+			}
+
+			function renderComparisons(amount) {
+				var items = getComparisons(amount);
+				compList.innerHTML = items.map(function (text) {
+					return '<li class="comparison-item">' +
+						'<span class="comparison-icon" aria-hidden="true">→</span>' +
+						'<span class="comparison-text">' + text + '</span>' +
+						'</li>';
+				}).join('');
+				comparisonsEl.hidden = false;
 			}
 
 			function render(seconds) {
@@ -142,48 +307,64 @@
 				var qualifier = best.unit === 'second' ? '' : 'about ';
 
 				resultMain.textContent = 'At £1 per second, ' + formatCurrency(seconds) + ' takes ' + qualifier + readableValue + ' ' + unit + '.';
+				resultSub.textContent  = '';
 
-				if (seconds >= 1000000000) {
-					resultSub.textContent = 'You would receive ' + formatCurrency(seconds) + ' over roughly ' + formatNumber(seconds / YEAR, 2) + ' years.';
-				} else if (seconds >= 1000000) {
-					resultSub.textContent = 'You would receive ' + formatCurrency(seconds) + ' over roughly ' + formatNumber(seconds / DAY, 2) + ' days.';
-				} else {
-					resultSub.textContent = 'For smaller amounts, seconds are usually the clearest unit.';
-				}
+				renderBreakdown(seconds);
+				renderComparisons(seconds);
 			}
 
-			function onSubmit(event) {
-				event.preventDefault();
+			function reset() {
+				resultMain.textContent   = 'Enter an amount to begin.';
+				resultSub.textContent    = 'At £1 per second, £1,000,000 takes about 11.6 days.';
+				inputPreview.textContent = '';
+				breakdownEl.hidden   = true;
+				comparisonsEl.hidden = true;
+				presetBtns.forEach(function (btn) { btn.classList.remove('is-active'); });
+			}
 
-				var value = parseInput(input.value);
+			function handleValue(value) {
 				if (!Number.isFinite(value) || value < 0) {
 					resultMain.textContent = 'Please enter a valid positive number.';
-					resultSub.textContent = 'Use digits only, e.g. 5000000 or 1000000.';
+					resultSub.textContent  = 'Use digits only, e.g. 5000000 or 1000000000.';
+					breakdownEl.hidden   = true;
+					comparisonsEl.hidden = true;
 					return;
 				}
-
+				inputPreview.textContent = '= ' + formatCurrency(value);
 				render(value);
 			}
 
-			form.addEventListener('submit', onSubmit);
+			form.addEventListener('submit', function (event) {
+				event.preventDefault();
+				handleValue(parseInput(input.value));
+			});
 
 			input.addEventListener('input', function () {
 				var digitsOnly = sanitizeToDigits(input.value);
-				if (input.value !== digitsOnly) {
-					input.value = digitsOnly;
-				}
+				if (input.value !== digitsOnly) input.value = digitsOnly;
 
-				if (!input.value.trim()) {
-					resultMain.textContent = 'Enter an amount to begin.';
-					resultSub.textContent = 'At £1 per second, £1,000,000 takes about 11.6 days.';
-				}
+				presetBtns.forEach(function (btn) { btn.classList.remove('is-active'); });
+
+				if (!input.value.trim()) { reset(); return; }
+
+				handleValue(parseInput(input.value));
 			});
 
 			input.addEventListener('paste', function (event) {
 				event.preventDefault();
-				var clipboardText = (event.clipboardData || window.clipboardData).getData('text');
-				var digitsOnly = sanitizeToDigits(clipboardText);
-				input.value = digitsOnly;
+				var text = (event.clipboardData || window.clipboardData).getData('text');
+				input.value = sanitizeToDigits(text);
+				input.dispatchEvent(new Event('input'));
+			});
+
+			presetBtns.forEach(function (btn) {
+				btn.addEventListener('click', function () {
+					var value = Number(btn.getAttribute('data-value'));
+					input.value = String(value);
+					presetBtns.forEach(function (b) { b.classList.remove('is-active'); });
+					btn.classList.add('is-active');
+					handleValue(value);
+				});
 			});
 		})();
 	</script>
