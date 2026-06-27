@@ -5,6 +5,7 @@
 
 /* ── RESET ───────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden]               { display: none !important; }
 
 /* ── TOKENS ──────────────────────────────────────── */
 :root {
@@ -802,4 +803,111 @@ footer {
   .calc-btn {
     min-height: 48px;
   }
+}
+
+.calc-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.preset-btn {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.preset-btn:hover,
+.preset-btn.is-active {
+  border-color: var(--orange);
+  color: var(--orange);
+  background: rgba(235, 73, 16, 0.06);
+}
+
+.calc-form        { margin-bottom: 6px; }
+
+.input-preview {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+  min-height: 1.2em;
+}
+
+.calc-breakdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.breakdown-unit {
+  text-align: center;
+  padding: 12px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--cream);
+}
+
+.breakdown-value {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.breakdown-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.calc-comparisons {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.comparisons-header {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.comparison-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.comparison-icon        { color: var(--orange); flex-shrink: 0; font-size: 0.75rem; }
+.comparison-text        { color: var(--mid); line-height: 1.4; }
+.comparison-text strong { color: var(--dark); font-weight: 600; }
+
+@media (max-width: 560px) {
+  .calc-breakdown { grid-template-columns: repeat(2, 1fr); }
 }
