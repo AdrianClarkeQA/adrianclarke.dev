@@ -652,6 +652,12 @@ footer {
 
 [data-theme="dark"] .nav-cta          { background: var(--orange) !important; color: #fff !important; }
 
+/* Calculator uses a few fixed light surfaces; align them with dark theme */
+[data-theme="dark"] .calc-wrap         { background: #242018; box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45); }
+[data-theme="dark"] .calc-input        { background: #1f1b18; color: var(--dark); border-color: #3a342f; }
+[data-theme="dark"] .calc-input::placeholder { color: var(--muted); opacity: 0.9; }
+[data-theme="dark"] .calc-btn:hover    { background: #f05a27; }
+
 
 /* ═══════════════════════════════════════════════════════
    BILLIONS CALCULATOR
