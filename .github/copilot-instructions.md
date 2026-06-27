@@ -26,6 +26,8 @@
 - Run tests after meaningful code changes.
 - Preferred test command: `npm run test:e2e`.
 - If tests cannot be run, clearly state why.
+- No tests should be flaky; if they are, they should be fixed or removed.
+- If any tests fail, provide a clear explanation of the failure and how to fix it; do not fix the tests without understanding the failure and explaining it.
 
 ## Communication style
 - Explain what changed and why.
