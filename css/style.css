@@ -598,6 +598,13 @@ footer {
   /* Misc */
   .quote-band { padding: 72px 24px; }
   footer .footer-inner { padding: 32px 24px; }
+
+  /* Footer alignment on mobile */
+  .footer-secondary {
+    width: auto;
+    text-align: left;
+    margin-top: -8px;
+  }
 }
 
 /* ── ANIMATIONS ──────────────────────────────────── */
