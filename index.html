@@ -107,40 +107,7 @@
       <h2>Skills</h2>
       <div class="skills-rule"></div>
     </div>
-    <div class="skills-grid">
-      <div class="skill">
-        <div class="skill-name">Test Automation</div>
-        <div class="skill-detail">Playwright · Frameworks · Git</div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">API Testing</div>
-        <div class="skill-detail">Postman · REST Assured</div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">Test Strategy</div>
-        <div class="skill-detail">Test Planning · Schema Validation</div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">Version Control</div>
-        <div class="skill-detail">Test Analysis · PR Reviews</div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">Mobile Testing</div>
-        <div class="skill-detail">iOS · Android</div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">Languages</div>
-        <div class="skill-detail">TypeScript · JavaScript</div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">Methodology</div>
-        <div class="skill-detail">Agile · TDD · Shift-Left</div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">Troubleshooting</div>
-        <div class="skill-detail">Defect Analysis · Root Cause Investigation</div>
-      </div>
-    </div>
+    <div class="skills-grid" id="skills-grid" aria-live="polite"></div>
   </section>
 
   <!-- QUOTE BAND -->
@@ -153,6 +120,9 @@
 
   <!-- FOOTER -->
   <div id="footer-placeholder"></div>
+
+  <!-- Skills loader -->
+  <script src="/js/skills-loader.js" defer></script>
 
   <!-- Components loader — must be last -->
   <script src="/js/footer-loader.js"></script>
