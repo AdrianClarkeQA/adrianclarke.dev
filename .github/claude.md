@@ -39,6 +39,7 @@
 - If a question is asked, answer it directly and clearly.
 - If a question is asked that cannot be answered, explain why and what information is needed to answer it.
 - Suggest changes to this instruction file if you think they would improve the workflow or code quality.
+- When requesting permission to run a command, give a simple one line about what the command does and why it's needed.
 
 ## Verification
 - At the start of substantial tasks, explicitly confirm these repository instructions are being applied.
