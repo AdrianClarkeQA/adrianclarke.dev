@@ -81,11 +81,14 @@
   "skills": [
     { "name": "Test Automation",    "tools": ["Playwright"] },
     { "name": "API Testing",        "tools": ["Postman", "REST Assured"] },
-    { "name": "Mobile Testing",     "tools": ["BrowserStack"] },
-    { "name": "Languages",          "tools": ["TypeScript", "Java", "Python"] },
-    { "name": "Analytical Skills",  "tools": ["Data Analysis", "Problem Solving,"] },
+    { "name": "Test Strategy",      "tools": ["Test Planning", "Schema Validation"] },
+    { "name": "Mobile Testing",     "tools": ["iOS", "Android", "BrowserStack"] },
+    { "name": "Languages",          "tools": ["TypeScript", "JavaScript"] },
+    { "name": "Methodology",        "tools": ["Agile", "TDD", "Shift-Left"] },
+    { "name": "Troubleshooting",    "tools": ["Defect Analysis", "Root Cause Investigation"] },
+    { "name": "Analytical Skills",  "tools": ["Data Analysis", "Problem Solving"] },
     { "name": "Team Leadership",    "tools": ["Mentoring", "Team Management"] },
-    { "name": "Project Management", "tools": ["Agile Methodologies", "JIRA"] }
+    { "name": "Version Control",    "tools": ["Git", "GitHub"] }
   ],
 
   "education": [
