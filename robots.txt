@@ -2,5 +2,5 @@ User-agent: *
 Disallow: /pages/cv.html
 Disallow: /pages/curriculum-vitae.html
 Disallow: /car/ch64tho.html
-Disallow: /car/CH64THO.jpg
+Disallow: /car/ch64tho.jpg
 Disallow: /calculator/billions.html
