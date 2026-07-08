@@ -6,8 +6,24 @@
 
 /* Print button handler */
 var printButton = document.getElementById('cv-print-btn');
+var preferredPrintFileName = 'Adrian-Clarke-QA-CV';
+var originalTitle = document.title;
+
+function applyPrintTitle() {
+  originalTitle = document.title;
+  document.title = preferredPrintFileName;
+}
+
+function restoreTitle() {
+  document.title = originalTitle;
+}
+
+window.addEventListener('beforeprint', applyPrintTitle);
+window.addEventListener('afterprint', restoreTitle);
+
 if (printButton) {
   printButton.addEventListener('click', function () {
+    applyPrintTitle();
     window.print();
   });
 }
