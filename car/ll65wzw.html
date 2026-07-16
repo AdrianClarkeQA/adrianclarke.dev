@@ -329,6 +329,96 @@
       padding-top: 2px;
     }
 
+    .check-flags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .flag {
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.86rem;
+      font-weight: 650;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .flag.clear { color: var(--ok); border-color: #a5d2be; background: #edf8f2; }
+    .flag.alert { color: var(--bad); border-color: #db9da8; background: #fdecef; }
+    .flag.warn  { color: #7a5000; border-color: #e5c97a; background: #fef9ec; }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .odometer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .odometer-table th {
+      text-align: left;
+      color: var(--ink-soft);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .odometer-table td {
+      padding: 7px 8px;
+      border-bottom: 1px solid #f0ebe4;
+      font-weight: 500;
+    }
+
+    .odometer-table tr:last-child td { border-bottom: none; }
+
+    .plate-changes {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .plate-change-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+    }
+
+    .plate-tag {
+      display: inline-block;
+      border: 1px solid #b69672;
+      background: #fef1b6;
+      color: #231d14;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-weight: 760;
+      letter-spacing: 0.06em;
+      font-size: 0.88rem;
+    }
+
+    .plate-arrow { color: var(--ink-soft); font-size: 0.85rem; }
+
+    @media (max-width: 880px) {
+      .check-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 880px) {
       .grid-two { grid-template-columns: 1fr; }
       .hero-top { flex-direction: column; }
@@ -382,6 +472,26 @@
         <h2 class="section-title">MOT History</h2>
         <ul class="timeline" id="motTimeline"></ul>
       </article>
+    </section>
+
+    <section class="card" id="checkSection">
+      <h2 class="section-title">Vehicle Check</h2>
+      <div class="check-flags" id="checkFlags"></div>
+      <div class="check-grid">
+        <div>
+          <h3 class="section-title" style="font-size:0.95rem;">Registration History</h3>
+          <ul class="plate-changes" id="plateChanges"></ul>
+        </div>
+        <div>
+          <h3 class="section-title" style="font-size:0.95rem;">DVLA Record</h3>
+          <div class="spec-grid" id="dvlaSpecs"></div>
+        </div>
+      </div>
+      <h3 class="section-title" style="font-size:0.95rem;margin-top:16px;">Mileage History</h3>
+      <table class="odometer-table" id="odometerTable">
+        <thead><tr><th>Date</th><th>Source</th><th>Mileage</th></tr></thead>
+        <tbody id="odometerBody"></tbody>
+      </table>
     </section>
 
     <section class="card">
@@ -1995,7 +2105,7 @@
   <script>
     (function () {
       const data = JSON.parse(document.getElementById("carData").textContent);
-      const { vehicle, history, motTests, valuations, features } = data;
+      const { vehicle, history, check, motTests, valuations, features } = data;
 
       const fmtCurrency = (n) => n == null ? "N/A" : new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(n);
       const fmtNum = (n) => n == null ? "N/A" : new Intl.NumberFormat("en-GB").format(n);
@@ -2083,6 +2193,57 @@
         const statusClass = test.testResult && test.testResult.toLowerCase() === "passed" ? "pass" : "fail";
         return `<li><div class="row"><strong>${fmtDate(test.completedDate)}</strong><span class="badge ${statusClass}">${test.testResult || "Unknown"}</span></div><div class="row"><span>${fmtNum(test.odometerValue)} ${test.odometerUnit || ""}</span><span>Expires: ${fmtDate(test.expiryDate)}</span></div>${comments ? `<ul class="notes">${comments}</ul>` : ""}</li>`;
       }).join("");
+
+      if (check) {
+        const flagDefs = [
+          { label: "High Risk",              val: check.highRisk,             alert: true },
+          { label: "Stolen",                 val: check.stolen,               alert: true },
+          { label: "Scrapped",               val: check.scrapped,             alert: true },
+          { label: "Write-off",              val: !!check.insuranceWriteoffCategory, alert: true, extra: check.insuranceWriteoffCategory ? ` (Cat ${check.insuranceWriteoffCategory})` : "" },
+          { label: "Private Finance",        val: check.privateFinance,       alert: true },
+          { label: "Trade Finance",          val: check.tradeFinance,         alert: true },
+          { label: "Mileage Discrepancy",    val: check.mileageDiscrepancy,   alert: true },
+          { label: "Registration Changed",   val: check.registrationChanged,  alert: false, warn: true },
+          { label: "Colour Changed",         val: check.colourChanged,        alert: false, warn: true },
+          { label: "Imported",               val: check.imported,             alert: false, warn: true },
+          { label: "Exported",               val: check.exported,             alert: false, warn: true },
+        ];
+        document.getElementById("checkFlags").innerHTML = flagDefs.map(({ label, val, alert, warn, extra = "" }) => {
+          if (val) {
+            const cls = alert ? "alert" : warn ? "warn" : "clear";
+            return `<span class="flag ${cls}">&#9888; ${label}${extra}</span>`;
+          }
+          return `<span class="flag clear">&#10003; No ${label}</span>`;
+        }).join("");
+
+        const plateChanges = check.plateChanges || [];
+        document.getElementById("plateChanges").innerHTML = plateChanges.length
+          ? plateChanges.map(p => `<li class="plate-change-item"><span class="plate-tag">${p.previousRegistration}</span><span class="plate-arrow">&#8594; changed to &#8594;</span><span class="plate-tag">${p.currentRegistration}</span><span style="color:var(--ink-soft);font-size:0.83rem;margin-left:auto">${fmtDate(p.startDate)}</span></li>`).join("")
+          : `<li style="color:var(--ink-soft);font-size:0.9rem;">No plate changes recorded</li>`;
+
+        const dvla = check.dvlaVehicle || {};
+        const dvlaRows = [
+          ["Make", dvla.make],
+          ["Model", dvla.model],
+          ["Body Type", dvla.bodyType],
+          ["Fuel Type", dvla.fuelType],
+          ["Transmission", dvla.transmissionType],
+          ["Engine", dvla.engineCapacityCC ? `${fmtNum(dvla.engineCapacityCC)} cc` : null],
+          ["Colour", dvla.colour],
+          ["CO2", dvla.co2EmissionsGKM ? `${dvla.co2EmissionsGKM} g/km` : null],
+        ];
+        document.getElementById("dvlaSpecs").innerHTML = dvlaRows.map(([label, value]) =>
+          `<article class="spec-item"><p class="spec-label">${label}</p><p class="spec-value">${value || "N/A"}</p></article>`
+        ).join("");
+
+        const readings = (check.odometerReadings || []).slice().sort((a, b) => new Date(b.performed) - new Date(a.performed));
+        document.getElementById("odometerBody").innerHTML = readings.length
+          ? readings.map(r => `<tr><td>${fmtDate(r.performed)}</td><td>${r.source}</td><td>${fmtNum(r.odometerReadingMiles)} miles</td></tr>`).join("")
+          : `<tr><td colspan="3" style="color:var(--ink-soft)">No readings recorded</td></tr>`;
+      } else {
+        const sec = document.getElementById("checkSection");
+        if (sec) sec.style.display = "none";
+      }
 
       const grouped = (features || []).reduce((acc, feature) => {
         const key = feature.category || "Other";
