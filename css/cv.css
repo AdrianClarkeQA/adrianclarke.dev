@@ -627,6 +627,45 @@ body.has-open-modal {
     padding: 0;
   }
 
+  /* Print-safe rendering: prefer local fonts and disable visual effects that can flatten text into vectors/images. */
+  .cv-print-section,
+  .cv-print-section * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    mix-blend-mode: normal !important;
+  }
+
+  .cv-doc,
+  .cv-doc-print,
+  .cv-doc * {
+    font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif !important;
+    font-kerning: normal !important;
+    font-variant-ligatures: none !important;
+    -webkit-font-smoothing: auto !important;
+    text-rendering: auto !important;
+  }
+
+  .cv-doc h1,
+  .cv-doc h2,
+  .cv-doc h3,
+  .cv-doc h4,
+  .cv-doc strong,
+  .cv-doc .cv-doc-subhead {
+    font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif !important;
+  }
+
+  .cv-doc-header h1,
+  .cv-doc-role,
+  .cv-doc-meta,
+  .cv-doc-meta a {
+    color: #ffffff !important;
+  }
+
   #nav-placeholder,
   .hero,
   footer,
@@ -688,37 +727,53 @@ body.has-open-modal {
   }
 
   .cv-doc-header {
-    background: #fff !important;
-    padding: 6px !important;
-    margin-bottom: 8px !important;
-    gap: 10px !important;
+    background: #eb4910 !important;
+    padding: 16px 16px !important;
+    margin-bottom: 12px !important;
+    gap: 14px !important;
     border-bottom: none !important;
-    grid-template-columns: 1fr 70px !important;
+    grid-template-columns: 1fr 78px !important;
     align-items: center !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    forced-color-adjust: none !important;
+  }
+
+  .cv-doc-header * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .cv-doc-header h1 {
-    font-size: 1.4rem !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
     margin: 0 !important;
-    line-height: 1.15 !important;
+    line-height: 1.08 !important;
   }
 
   .cv-doc-role {
-    margin: 0 !important;
-    font-size: 0.9rem !important;
-    line-height: 1 !important;
+    margin: 6px 0 0 0 !important;
+    font-size: 0.94rem !important;
+    font-weight: 500 !important;
+    line-height: 1.1 !important;
   }
 
   .cv-doc-meta {
     font-size: 0.8rem !important;
-    gap: 6px 10px !important;
-    margin: 2px 0 0 0 !important;
+    gap: 6px 14px !important;
+    margin: 14px 0 0 0 !important;
     line-height: 1.2 !important;
   }
 
+  .cv-doc-meta a {
+    text-decoration: none !important;
+  }
+
   .cv-doc-header-avatar {
-    width: 70px !important;
-    height: 70px !important;
+    width: 78px !important;
+    height: 78px !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    border-radius: 8px !important;
   }
 
   .cv-doc-grid {
@@ -733,6 +788,7 @@ body.has-open-modal {
     padding: 0 !important;
     margin: 0 !important;
     border-right: 1px solid #efe6da !important;
+    border-bottom: none !important;
     padding-right: 10px !important;
   }
 
