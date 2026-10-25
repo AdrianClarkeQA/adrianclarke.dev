@@ -47,6 +47,26 @@ test.describe('mobile layout', () => {
     expect(sidebar.y + sidebar.height).toBeLessThanOrEqual(main.y + 1);
   });
 
+  test('sidebar keeps its natural height when the viewport is taller than the page', async ({ page }) => {
+    // Tall viewports (full-page capture, tall phones) used to stretch the stacked sidebar
+    await page.setViewportSize({ width: viewports.mobile.width, height: 4000 });
+
+    for (const route of navFooterRoutes) {
+      await page.goto(route);
+      await expect(page.locator('#theme-toggle')).toBeVisible();
+
+      const sidebar = await box(page.locator('aside.sidebar'));
+      const toggle = await box(page.locator('#theme-toggle'));
+      const spaceBelowToggle = sidebar.y + sidebar.height - (toggle.y + toggle.height);
+      expect(spaceBelowToggle, `Space below theme toggle on ${route}`).toBeLessThan(48);
+
+      // Footer ends the page: at the viewport bottom on short pages, after the content on long ones
+      const footer = await box(page.locator('footer'));
+      const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+      expect(Math.abs(footer.y + footer.height - pageHeight), `Footer should sit at the bottom on ${route}`).toBeLessThan(2);
+    }
+  });
+
   test('skill tools sit under the skill name so long names never overlap', async ({ page }) => {
     await page.goto('/');
     const rows = page.locator('#skills-grid .skill-row');
