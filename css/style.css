@@ -359,14 +359,18 @@ html[data-theme="dark"] .theme-toggle-dot { background: transparent; }
   }
 }
 
-/* Narrow: sidebar stacks above main, in full */
+/* Narrow: sidebar stacks above main, in full. A column (not a wrapped row)
+   so the sidebar keeps its natural height on short pages / tall viewports;
+   main takes any spare height so the footer still sits at the bottom. */
 @media (max-width: 899px) {
+  /* nowrap matters: a wrapping column sizes to its widest content (the CV JSON) */
+  .layout { flex-direction: column; flex-wrap: nowrap; }
   .sidebar {
-    flex-basis: 100%;
+    flex: none;
     border-right: 0;
     border-bottom: 1px solid var(--color-divider);
   }
-  .main { flex-basis: 100%; }
+  .main { flex: 1 0 auto; }
 }
 
 /* ── FOOTER (pages/footer.html) ──────────────────── */
