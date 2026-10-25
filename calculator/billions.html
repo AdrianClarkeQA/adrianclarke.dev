@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="theme-color" content="#2F3E46">
+	<meta name="theme-color" content="#f2f2f3" media="(prefers-color-scheme: light)">
+	<meta name="theme-color" content="#151617" media="(prefers-color-scheme: dark)">
 	<meta name="description" content="If you were given £1 per second, see how long it would take to reach your target amount.">
 	<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, max-image-preview:none">
 	<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, max-image-preview:none">
@@ -30,7 +31,7 @@
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="/css/style.css">
 	<script src="/js/theme.js"></script>
@@ -44,22 +45,25 @@
 	</script>
 </head>
 <body>
-	<div id="nav-placeholder"></div>
+	<div class="layout">
+
+	<!-- SIDEBAR — swapped in by nav-loader.js -->
+	<div id="nav-placeholder" class="sidebar"></div>
 	<script src="/js/nav-loader.js" defer></script>
 
-	<main class="calc-shell">
-		<section class="calc-wrap" aria-labelledby="calculator-title">
-			<p class="calc-overline">Currency Thought Experiment</p>
-			<h1 id="calculator-title" class="calc-title">Do you know just how big <em>a billion</em> is?</h1>
+	<main class="main">
+		<section class="hero calc-wrap" aria-labelledby="calculator-title">
+			<p class="kicker">Currency Thought Experiment</p>
+			<h1 id="calculator-title" class="hero-title calc-title">Do you know just how big <em>a billion</em> is?</h1>
 			<p class="calc-copy">
 				If someone gave you £1 every second, how long would it take to reach a specific amount? This is an exercise to show how bad humans are at understanding very large numbers.
 			</p>
 
 			<div class="calc-presets" role="group" aria-label="Quick amounts">
-				<button type="button" class="preset-btn" data-value="1000000">£1 million</button>
-				<button type="button" class="preset-btn" data-value="1000000000">£1 billion</button>
-				<button type="button" class="preset-btn" data-value="100000000000">£100 billion</button>
-				<button type="button" class="preset-btn" data-value="1000000000000">£1 trillion</button>
+				<button type="button" class="btn btn-ghost preset-btn" data-value="1000000">£1 million</button>
+				<button type="button" class="btn btn-ghost preset-btn" data-value="1000000000">£1 billion</button>
+				<button type="button" class="btn btn-ghost preset-btn" data-value="100000000000">£100 billion</button>
+				<button type="button" class="btn btn-ghost preset-btn" data-value="1000000000000">£1 trillion</button>
 			</div>
 
 			<form id="seconds-form" class="calc-form" novalidate>
@@ -74,7 +78,7 @@
 					placeholder="Enter any amount…"
 					aria-describedby="result-sub"
 				>
-				<button type="submit" class="calc-btn">Calculate</button>
+				<button type="submit" class="btn btn-primary btn-lg calc-btn">Calculate</button>
 			</form>
 
 			<p id="input-preview" class="input-preview" aria-live="polite"></p>
@@ -108,9 +112,13 @@
 				</div>
 			</div>
 		</section>
+
+		<!-- FOOTER — swapped in by footer-loader.js -->
+		<div id="footer-placeholder"></div>
 	</main>
 
-	<div id="footer-placeholder"></div>
+	</div>
+
 	<script src="/js/footer-loader.js"></script>
 
 	<script>

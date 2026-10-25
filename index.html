@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2F3E46">
+  <meta name="theme-color" content="#f2f2f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151617" media="(prefers-color-scheme: dark)">
   <meta name="description" content="QA Engineer in the West Midlands with a pragmatic, automation-first approach to software quality, test strategy, and shift-left delivery.">
   <link rel="canonical" href="https://adrianclarke.dev/">
   <meta property="og:locale" content="en_GB">
@@ -30,7 +31,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css">
@@ -50,76 +51,66 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <div id="nav-placeholder"></div>
-  <script src="/js/nav-loader.js" defer></script>
+  <div class="layout">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-overline">QA Engineer · West Midlands, UK</p>
-      <h1 class="hero-title">
-        Adrian<br><em>Clarke</em>
-      </h1>
-      <p class="hero-bio">
-        True quality is foundational, not optional; <strong>it shouldn't be an afterthought</strong><br>
-        Passionate about the quality delivered, I build tests, own strategy, and embed quality into every stage
-        of the development cycle.<br>
-        <br>
-        QA since 2017. <strong>Pedantic since birth.</strong> <br>
-      </p>
-      <div class="hero-actions">
-        <a href="/pages/cv.html" class="btn-primary">View CV →</a>
-        <a href="/pages/about-me.html" class="btn-ghost">About Me</a>
-        <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="btn-ghost">LinkedIn ↗</a>
-      </div>
-    </div>
-    <div class="hero-photo">
-      <img id="avatar-img" alt="Adrian Clarke">
-      <script src="/js/avatar.js"></script>
-    </div>
-  </section>
+    <!-- SIDEBAR — swapped in by nav-loader.js -->
+    <div id="nav-placeholder" class="sidebar"></div>
+    <script src="/js/nav-loader.js" defer></script>
 
-  <!-- PILLARS -->
-  <section class="pillars">
-    <div class="pillars-inner">
-      <div class="pillar">
-        <div class="pillar-icon">⚙</div>
-        <h3 class="pillar-title">Test Strategy</h3>
-        <p class="pillar-desc">Designing pragmatic test plans that balance risk, speed, and coverage to give teams confidence in every release without slowing delivery</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">⚡</div>
-        <h3 class="pillar-title">Automation First</h3>
-        <p class="pillar-desc">Approaching every task with an automation-first mindset, leveraging Playwright to catch regressions before they reach production.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">↺</div>
-        <h3 class="pillar-title">Shift-Left Quality</h3>
-        <p class="pillar-desc">Embedding QA thinking and solid feedback into planning and design — because the cheapest bug is the one never written.</p>
-      </div>
-    </div>
-  </section>
+    <main class="main">
 
-  <!-- SKILLS -->
-  <section class="skills-section">
-    <div class="skills-header">
-      <h2>Skills</h2>
-      <div class="skills-rule"></div>
-    </div>
-    <div class="skills-grid" id="skills-grid" aria-live="polite"></div>
-  </section>
+      <!-- HERO -->
+      <section class="hero">
+        <p class="kicker">QA Engineer · West Midlands, UK</p>
+        <h1 class="hero-title">True quality is foundational, not optional; it shouldn't be an afterthought<span class="accent-mark">.</span></h1>
+        <div class="hero-lower">
+          <p class="hero-bio">Passionate about the quality delivered, I build tests, own strategy, and embed quality into every stage of the development cycle.</p>
+          <div class="hero-actions">
+            <a href="/pages/cv.html" class="btn btn-primary btn-lg blueprint">View CV →<i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i></a>
+            <a href="/pages/about-me.html" class="btn btn-ghost btn-lg">About me</a>
+          </div>
+        </div>
+      </section>
 
-  <!-- QUOTE BAND -->
-  <section class="quote-band">
-    <p class="quote-text">
-      "Be curious, not judgmental."
-    </p>
-    <p class="quote-attr">— Personal Philosophy</p>
-  </section>
+      <!-- APPROACH -->
+      <section class="approach" aria-label="Approach">
+        <div class="approach-item">
+          <span class="approach-num" aria-hidden="true">01</span>
+          <h2 class="approach-title">Test Strategy</h2>
+          <p class="approach-copy">Designing pragmatic test plans that balance risk, speed, and coverage to give teams confidence in every release without slowing delivery</p>
+        </div>
+        <div class="approach-item">
+          <span class="approach-num" aria-hidden="true">02</span>
+          <h2 class="approach-title">Automation First</h2>
+          <p class="approach-copy">Approaching every task with an automation-first mindset, leveraging Playwright to catch regressions before they reach production.</p>
+        </div>
+        <div class="approach-item">
+          <span class="approach-num" aria-hidden="true">03</span>
+          <h2 class="approach-title">Shift-Left Quality</h2>
+          <p class="approach-copy">Embedding QA thinking and solid feedback into planning and design — because the cheapest bug is the one never written.</p>
+        </div>
+      </section>
 
-  <!-- FOOTER -->
-  <div id="footer-placeholder"></div>
+      <!-- SKILLS — rows rendered from /data/cv.json by skills-loader.js -->
+      <section class="skills-section" aria-labelledby="skills-heading">
+        <div class="skills-header">
+          <h2 id="skills-heading">Skills</h2>
+          <span class="skills-count" id="skills-count"></span>
+        </div>
+        <ol class="skills-list" id="skills-grid" aria-live="polite"></ol>
+      </section>
+
+      <!-- QUOTE BAND -->
+      <section class="quote-band">
+        <blockquote class="quote-text"><span class="accent-mark">“</span>Be curious, not judgmental.<span class="accent-mark">”</span></blockquote>
+        <p class="quote-attr">— Personal Philosophy</p>
+      </section>
+
+      <!-- FOOTER — swapped in by footer-loader.js -->
+      <div id="footer-placeholder"></div>
+
+    </main>
+  </div>
 
   <!-- Skills loader -->
   <script src="/js/skills-loader.js" defer></script>
