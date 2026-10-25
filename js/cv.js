@@ -14,6 +14,7 @@
   var output = document.getElementById('json-output');
   var jsonView = document.getElementById('cv-json-view');
   var readableView = document.getElementById('cv-readable');
+  var note = document.getElementById('cv-note');
   var viewButtons = document.querySelectorAll('[data-cv-view]');
   var copyButton = document.getElementById('cv-copy');
   var printButton = document.getElementById('cv-print');
@@ -140,6 +141,7 @@
     var showReadable = view === 'readable';
     if (jsonView) jsonView.hidden = showReadable;
     if (readableView) readableView.hidden = !showReadable;
+    if (note) note.hidden = showReadable; // the note belongs with the JSON view only
 
     viewButtons.forEach(function (button) {
       button.setAttribute('aria-pressed', String(button.getAttribute('data-cv-view') === view));
