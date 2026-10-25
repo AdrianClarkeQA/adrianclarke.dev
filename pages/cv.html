@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#2F3E46">
+  <meta name="theme-color" content="#f2f2f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151617" media="(prefers-color-scheme: dark)">
   <meta name="description" content="Interactive CV for Adrian Clarke, including QA experience, skills, and test-focused project highlights.">
   <link rel="canonical" href="https://adrianclarke.dev/pages/cv.html">
   <meta property="og:locale" content="en_GB">
@@ -31,7 +32,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css">
@@ -52,64 +53,63 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <div id="nav-placeholder"></div>
-  <script src="/js/nav-loader.js" defer></script>
+  <div class="layout">
 
-  <!-- CV HERO — JSON left, photo right -->
-  <section class="hero">
+    <!-- SIDEBAR — swapped in by nav-loader.js -->
+    <div id="nav-placeholder" class="sidebar"></div>
+    <script src="/js/nav-loader.js" defer></script>
 
-    <div class="cv-hero-content">
-      <p class="cv-eyebrow">Curriculum Vitae</p>
-      <div class="json-container">
-        <pre class="json-pre" id="json-output">Loading…</pre>
-      </div>
-      <div class="cv-footer">
-        <div class="cv-print-group">
-          <a href="/pages/curriculum-vitae.html" class="btn-primary">Print-friendly version</a>
+    <main class="main">
+
+      <!-- CV HEAD -->
+      <section class="cv-head">
+        <p class="kicker">Curriculum vitae</p>
+        <div class="cv-head-row">
+          <h1 class="hero-title title-xl cv-title">cv.json</h1>
+          <div class="cv-toolbar no-print">
+            <div class="seg" role="group" aria-label="CV format">
+              <button type="button" class="seg-opt" data-cv-view="json" aria-pressed="true">JSON</button>
+              <button type="button" class="seg-opt" data-cv-view="readable" aria-pressed="false">Readable</button>
+            </div>
+            <button type="button" class="btn btn-ghost" id="cv-copy" aria-live="polite">Copy JSON</button>
+            <button type="button" class="btn btn-ghost" id="cv-print">Print / save PDF</button>
+          </div>
         </div>
-        <a href="/index.html" class="btn-ghost">← Back to home</a>
-      </div>
-      <div class="cv-footer">
-        <p class="cv-print-note">
-          <span class="cv-print-note-title">A note from the nerd</span>
-          <span class="cv-print-note-body">
-            <span class="cv-print-note-line">This idea of a JSON CV is entirely my own creation and the initial idea which started it all. Having built it, I needed a website for it to sit in, so here we are!</span>
-            <span class="cv-print-note-line">I hope you enjoy this project as much as I enjoyed creating it.</span>
-            <span class="cv-print-note-signoff">Ade</span>
-          </span>
-        </p>
-      </div>
-    </div>
+      </section>
 
-    <div class="hero-photo">
-      <img id="avatar-img" alt="Adrian Clarke">
-      <script src="/js/avatar.js"></script>
-    </div>
-
-  </section>
-
-  <div class="cv-modal" id="cv-modal" hidden>
-    <div class="cv-modal-backdrop" data-close-modal></div>
-    <div class="cv-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
-      <div class="cv-modal-toolbar">
-        <h2 class="cv-modal-title" id="cv-modal-title">Curriculum Vitae</h2>
-        <div class="cv-modal-actions">
-          <button type="button" class="btn-ghost cv-modal-print" id="cv-modal-print">Print</button>
-          <button type="button" class="btn-ghost cv-modal-close" data-close-modal aria-label="Close CV modal">Close</button>
+      <!-- JSON VIEW — rendered from /data/cv.json by cv.js -->
+      <div class="terminal" id="cv-json-view">
+        <div class="terminal-bar">
+          <span class="terminal-path">~/adrianclarke/cv.json</span>
+          <span>Click a key to fold</span>
+        </div>
+        <div class="terminal-body" id="json-output" role="region" aria-label="cv.json source" tabindex="0">
+          <p class="terminal-status">Loading…</p>
         </div>
       </div>
-      <div class="cv-modal-content" id="cv-modal-content">
-        <p class="cv-doc-loading">Loading document...</p>
-      </div>
-    </div>
+
+      <!-- READABLE VIEW — rendered from /data/cv.json by cv-render.js -->
+      <div class="cv-readable" id="cv-readable" hidden></div>
+
+      <!-- NOTE -->
+      <aside class="cv-note no-print" aria-labelledby="cv-note-title">
+        <h2 class="section-label" id="cv-note-title">A note from the nerd</h2>
+        <p>This idea of a JSON CV is entirely my own creation and the initial idea which started it all. Having built it, I needed a website for it to sit in, so here we are!</p>
+        <p>I hope you enjoy this project as much as I enjoyed creating it.</p>
+        <p class="cv-note-signoff">Ade</p>
+      </aside>
+
+      <!-- FOOTER — swapped in by footer-loader.js -->
+      <div id="footer-placeholder"></div>
+
+    </main>
   </div>
 
-  <!-- FOOTER -->
-  <div id="footer-placeholder"></div>
+  <!-- CV scripts -->
+  <script src="/js/cv-render.js"></script>
+  <script src="/js/cv.js"></script>
 
   <!-- Components loader — must be last -->
-  <script src="/js/cv.js"></script>
   <script src="/js/footer-loader.js"></script>
 
 </body>

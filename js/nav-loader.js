@@ -1,6 +1,6 @@
 /**
  * nav-loader.js
- * Fetches nav.html and injects it before the first element in <body>.
+ * Fetches nav.html (the sidebar) and swaps it in for #nav-placeholder.
  * Usage: <script src="/js/nav-loader.js" defer></script>
  *
  * The script resolves nav.html relative to the site root by default.
@@ -9,6 +9,15 @@
 
 (function () {
   const NAV_PATH = '/pages/nav.html';
+
+  // Which nav item each route belongs to
+  const ROUTE_SECTIONS = {
+    '/': 'home',
+    '/index.html': 'home',
+    '/pages/about-me.html': 'about',
+    '/pages/cv.html': 'cv',
+    '/pages/curriculum-vitae.html': 'cv'
+  };
 
   fetch(NAV_PATH)
     .then(function (res) {
@@ -23,18 +32,19 @@
         document.body.insertAdjacentHTML('afterbegin', html);
       }
 
-      const toggle = document.querySelector('.nav-toggle');
-      const links  = document.getElementById('nav-links');
-      if (toggle && links) {
-        toggle.addEventListener('click', function () {
-          const open = links.classList.toggle('is-open');
-          toggle.setAttribute('aria-expanded', open);
-        });
-      }
+      markCurrentPage();
 
       if (window.__initThemeToggle) window.__initThemeToggle();
     })
     .catch(function (err) {
       console.warn(err);
     });
+
+  function markCurrentPage() {
+    const section = ROUTE_SECTIONS[window.location.pathname];
+    if (!section) return;
+
+    const link = document.querySelector('.nav [data-nav="' + section + '"]');
+    if (link) link.setAttribute('aria-current', 'page');
+  }
 })();

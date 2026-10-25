@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2F3E46">
+  <meta name="theme-color" content="#f2f2f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151617" media="(prefers-color-scheme: dark)">
   <meta name="description" content="Learn more about Adrian Clarke, a Staffordshire-based QA engineer focused on quality culture, collaboration, and practical test strategy.">
   <link rel="canonical" href="https://adrianclarke.dev/pages/about-me.html">
   <meta property="og:locale" content="en_GB">
@@ -30,7 +31,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css">
@@ -50,54 +51,32 @@
 </head>
 <body class="page-about">
 
-  <!-- NAV -->
-  <div id="nav-placeholder"></div>
-  <script src="/js/nav-loader.js" defer></script>
+  <div class="layout">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-overline">Tall · Curious · Pedantic</p>
-      <h1 class="hero-title">
-        About<em>Me</em>
-      </h1>
-      <p class="hero-bio">
-        I'm Adrian — a QA Engineer with 8+ years' experience making sure web-based software actually works the way it's supposed to.
-        <br><br>
-        I currently QA at Click Dealer, where I am helping to drive test automation strategy (Playwright, TypeScript, Postman) across our digital products, and work closely with engineering to keep quality baked into the process rather than bolted on at the end. I've help build the QA team into what it is today — I care as much about making a team good at testing as I do about testing itself.
-        <br><br>
-        Before QA, I spent a decade in digital marketing — running paid search campaigns and SEM analysis for brand clients. It's an unusual route into software testing, but it means I think about quality from the user's side of the product, not just the code's.
-        <br><br>
-        I'm ISTQB Certified Tester (Foundation Level), and outside of the day job I'm currently in the early stages of teaching myself a little bit of game development using Godot — exploring what it'd take to build and ship a game on Steam. It's a bit of a bucket list item, but I think it's good to have goals that are a little bit scary.
-      </p>
-      <p class="hero-bio">
-        If you want to get in touch you can find me on <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener">LinkedIn</a>.
-      </p>
+    <!-- SIDEBAR — swapped in by nav-loader.js -->
+    <div id="nav-placeholder" class="sidebar"></div>
+    <script src="/js/nav-loader.js" defer></script>
 
-      <p class="hero-bio">
-        
-        
-      </p>
+    <main class="main">
 
+      <section class="hero">
+        <p class="kicker">Tall · Curious · Pedantic</p>
+        <h1 class="hero-title title-xl">About Me<span class="accent-mark">.</span></h1>
+        <p class="about-lead">I'm Adrian — a QA Engineer with 8+ years' experience making sure web-based software actually works the way it's supposed to.</p>
 
-    </div>
-    <div class="hero-photo">
-      <img id="avatar-img" alt="Adrian Clarke">
-      <script src="/js/avatar.js"></script>
-    </div>
-  </section>
+        <div class="about-body">
+          <p>I currently QA at Click Dealer, where I am helping to drive test automation strategy (Playwright, TypeScript, Postman) across our digital products, and work closely with engineering to keep quality baked into the process rather than bolted on at the end. I've help build the QA team into what it is today — I care as much about making a team good at testing as I do about testing itself.</p>
+          <p>Before QA, I spent a decade in digital marketing — running paid search campaigns and SEM analysis for brand clients. It's an unusual route into software testing, but it means I think about quality from the user's side of the product, not just the code's.</p>
+          <p>I'm ISTQB Certified Tester (Foundation Level), and outside of the day job I'm currently in the early stages of teaching myself a little bit of game development using Godot — exploring what it'd take to build and ship a game on Steam. It's a bit of a bucket list item, but I think it's good to have goals that are a little bit scary.</p>
+          <p>If you want to get in touch you can find me on <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+        </div>
+      </section>
 
- 
-  <!-- QUOTE BAND -->
-  <section class="quote-band">
-    <p class="quote-text">
-      "Be curious, not judgmental."
-    </p>
-    <p class="quote-attr">— Personal Philosophy</p>
-  </section>
+      <!-- FOOTER — swapped in by footer-loader.js -->
+      <div id="footer-placeholder"></div>
 
-  <!-- FOOTER -->
-  <div id="footer-placeholder"></div>
+    </main>
+  </div>
 
   <!-- Components loader — must be last -->
   <script src="/js/footer-loader.js"></script>

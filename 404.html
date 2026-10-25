@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#2F3E46">
+  <meta name="theme-color" content="#f2f2f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151617" media="(prefers-color-scheme: dark)">
   <meta name="description" content="404 page for adrianclarke.dev.">
   <link rel="canonical" href="https://adrianclarke.dev/404.html">
   <meta property="og:locale" content="en_GB">
@@ -31,7 +32,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css">
@@ -51,28 +52,28 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <div id="nav-placeholder"></div>
-  <script src="/js/nav-loader.js" defer></script>
+  <div class="layout">
 
-  <!-- 404 -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-overline">404 — Page Not Found</p>
-      <h1 class="hero-title">
-        Oops!<br><em>No worries.</em>
-      </h1>
-      <p class="hero-bio">
-        The page you were after doesn't exist — but the rest of the site does.
-      </p>
-      <div class="hero-actions">
-        <a href="/" class="btn-primary">Back to home →</a>
-      </div>
-    </div>
-  </section>
+    <!-- SIDEBAR — swapped in by nav-loader.js -->
+    <div id="nav-placeholder" class="sidebar"></div>
+    <script src="/js/nav-loader.js" defer></script>
 
-  <!-- FOOTER -->
-  <div id="footer-placeholder"></div>
+    <main class="main">
+
+      <section class="hero">
+        <p class="kicker">404 — Page Not Found</p>
+        <h1 class="hero-title title-xl">Oops! No worries<span class="accent-mark">.</span></h1>
+        <p class="notfound-copy">The page you were after doesn't exist — but the rest of the site does.</p>
+        <div class="notfound-actions">
+          <a href="/" class="btn btn-primary btn-lg blueprint">Back to home →<i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i></a>
+        </div>
+      </section>
+
+      <!-- FOOTER — swapped in by footer-loader.js -->
+      <div id="footer-placeholder"></div>
+
+    </main>
+  </div>
 
   <!-- Components loader — must be last -->
   <script src="/js/footer-loader.js"></script>
