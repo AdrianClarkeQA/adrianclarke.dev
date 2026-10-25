@@ -18,8 +18,11 @@ test.describe('performance budgets', () => {
       '/js/theme.js',
       '/js/nav-loader.js',
       '/js/footer-loader.js',
-      '/js/avatar.js',
-      '/assets/images/avatar-brick-square.jpg'
+      '/js/skills-loader.js',
+      '/pages/nav.html',
+      '/pages/footer.html',
+      '/data/cv.json',
+      '/assets/images/avatar-adrian.jpg'
     ];
 
     let totalBytes = 0;
