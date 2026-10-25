@@ -20,6 +20,7 @@ for (const viewport of viewports) {
         await page.goto('/');
         await expect(page.locator('nav.nav')).toBeVisible();
         await expect(page.locator('footer')).toBeVisible();
+        await expect(page.locator('#skills-grid .skill-row').first()).toBeVisible();
 
         await page.evaluate(async () => {
           if (document.fonts && document.fonts.ready) {
@@ -29,8 +30,7 @@ for (const viewport of viewports) {
 
         await expect(page).toHaveScreenshot(`home-${viewport.name}-${theme}.png`, {
           fullPage: true,
-          animations: 'disabled',
-          mask: [page.locator('#avatar-img')]
+          animations: 'disabled'
         });
       });
     }
