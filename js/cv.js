@@ -3,12 +3,11 @@
    CV page (pages/cv.html). Fetches /data/cv.json and renders:
    - a syntax-highlighted, foldable JSON view in #json-output
    - a readable CV in #cv-readable (via cv-render.js)
-   plus the JSON / Readable toggle, Copy JSON and Print.
+   plus the JSON / Readable toggle and Print.
    Requires js/cv-render.js to be loaded first.
 ───────────────────────────────────────── */
 
 (function () {
-  var COPY_RESET_MS = 1600;
   var MAX_INDENT_CLASS = 6;
 
   var output = document.getElementById('json-output');
@@ -16,7 +15,6 @@
   var readableView = document.getElementById('cv-readable');
   var note = document.getElementById('cv-note');
   var viewButtons = document.querySelectorAll('[data-cv-view]');
-  var copyButton = document.getElementById('cv-copy');
   var printButton = document.getElementById('cv-print');
 
   if (!output || !window.CvRender) return;
@@ -24,7 +22,6 @@
   var escapeHtml = window.CvRender.escapeHtml;
   var cvData = null;
   var folded = {};
-  var copyTimer = null;
 
   window.CvRender.loadCv()
     .then(function (data) {
@@ -153,29 +150,6 @@
       setView(button.getAttribute('data-cv-view'));
     });
   });
-
-  /* ── Copy JSON ─────────────────────────── */
-
-  function setCopyLabel(text) {
-    copyButton.textContent = text;
-    clearTimeout(copyTimer);
-    copyTimer = setTimeout(function () {
-      copyButton.textContent = 'Copy JSON';
-    }, COPY_RESET_MS);
-  }
-
-  if (copyButton) {
-    copyButton.addEventListener('click', function () {
-      if (!cvData || !navigator.clipboard) {
-        setCopyLabel('Copy failed');
-        return;
-      }
-
-      navigator.clipboard.writeText(JSON.stringify(cvData, null, 2))
-        .then(function () { setCopyLabel('Copied'); })
-        .catch(function () { setCopyLabel('Copy failed'); });
-    });
-  }
 
   /* ── Print ─────────────────────────────── */
 
