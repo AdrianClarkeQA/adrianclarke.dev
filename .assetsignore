@@ -1,0 +1,17 @@
+# Files Wrangler should not upload as public site assets.
+# Same syntax as .gitignore. The assets directory is the repo root (wrangler.jsonc).
+
+# Not part of the site
+.assetsignore
+.git
+.github
+.vscode
+.gitignore
+node_modules
+tests
+tools
+package.json
+package-lock.json
+playwright.config.js
+wrangler.jsonc
+cname
