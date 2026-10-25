@@ -12,9 +12,10 @@ for (const theme of themes) {
       test(`${entry.name} page has no critical/serious violations`, async ({ page }) => {
         await setThemeBeforeNavigation(page, theme);
         await page.goto(entry.route);
-        await expect(page.locator('body')).toBeVisible();
+        await expect(page.locator('nav.nav')).toBeVisible();
+        await expect(page.locator('footer')).toBeVisible();
 
-        const violations = await scanCriticalAndSerious(page, ['#avatar-img']);
+        const violations = await scanCriticalAndSerious(page);
         const critical = violations.filter((violation) => violation.impact === 'critical');
         const unexpectedSerious = violations.filter((violation) => {
           return violation.impact === 'serious' && !allowedSeriousIds.has(violation.id);

@@ -18,6 +18,12 @@ const pageMatrix = [
     expectsRobotsNoIndex: true
   },
   {
+    name: 'print cv',
+    route: '/pages/curriculum-vitae.html',
+    canonical: 'https://adrianclarke.dev/pages/curriculum-vitae.html',
+    expectsRobotsNoIndex: true
+  },
+  {
     name: 'calculator',
     route: '/calculator/billions.html',
     canonical: 'https://adrianclarke.dev/calculator/billions.html',
@@ -31,13 +37,17 @@ const pageMatrix = [
   }
 ];
 
-const navFooterRoutes = [
-  '/',
-  '/pages/about-me.html',
-  '/pages/cv.html',
-  '/calculator/billions.html',
-  '/404.html'
-];
+const navFooterRoutes = pageMatrix.map((entry) => entry.route);
+
+// Which sidebar nav item should be marked aria-current="page" on each route (null = none)
+const currentNavByRoute = {
+  '/': 'Home',
+  '/pages/about-me.html': 'About me',
+  '/pages/cv.html': 'CV',
+  '/pages/curriculum-vitae.html': 'CV',
+  '/calculator/billions.html': null,
+  '/404.html': null
+};
 
 const visualRoutes = {
   home: '/',
@@ -50,5 +60,6 @@ const visualRoutes = {
 module.exports = {
   pageMatrix,
   navFooterRoutes,
+  currentNavByRoute,
   visualRoutes
 };

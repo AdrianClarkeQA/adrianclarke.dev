@@ -1,4 +1,22 @@
+const fs = require('fs');
+const path = require('path');
+
 const themes = ['light', 'dark'];
+
+// The CV source of truth — tests derive expectations from it rather than hard-coding CV content
+const cvData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'cv.json'), 'utf8'));
+
+const site = {
+  location: 'Staffordshire, UK',
+  linkedin: 'https://www.linkedin.com/in/adrian-clarke-37239218/',
+  avatar: '/assets/images/avatar-adrian.jpg',
+  socialImage: '/assets/images/avatar-adrian-og.jpg'
+};
+
+const viewports = {
+  desktop: { width: 1440, height: 900 },
+  mobile: { width: 390, height: 844 }
+};
 
 const calculatorCases = {
   zero: {
@@ -32,6 +50,9 @@ const performanceBudgets = {
 
 module.exports = {
   themes,
+  cvData,
+  site,
+  viewports,
   calculatorCases,
   performanceBudgets
 };

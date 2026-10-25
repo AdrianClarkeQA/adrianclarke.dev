@@ -1,16 +1,30 @@
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="/index.html" class="nav-brand">Adrian<em>Clarke</em>.dev</a>
-    <div class="nav-links" id="nav-links">
-      <a href="/pages/about-me.html">About Me</a>
-      <a href="/pages/cv.html">My CV</a>
-      <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener" class="nav-cta">My LinkedIn ↗</a>
+<aside class="sidebar">
+  <div class="sidebar-inner">
+    <div class="sidebar-id">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <p class="sidebar-name">Adrian<br>Clarke</p>
+      <p class="sidebar-meta">QA Engineer<br>Staffordshire, UK</p>
     </div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
-      <span class="toggle-knob"></span>
-    </button>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+
+    <nav class="nav" aria-label="Main">
+      <a href="/" data-nav="home"><span class="nav-num" aria-hidden="true">01</span>Home</a>
+      <a href="/pages/about-me.html" data-nav="about"><span class="nav-num" aria-hidden="true">02</span>About me</a>
+      <a href="/pages/cv.html" data-nav="cv"><span class="nav-num" aria-hidden="true">03</span>CV</a>
+    </nav>
+
+    <div class="blueprint sidebar-photo">
+      <i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i>
+      <img id="avatar-img" src="/assets/images/avatar-adrian.jpg" alt="Adrian Clarke" width="480" height="480">
+    </div>
+
+    <div class="sidebar-links">
+      <a href="https://www.linkedin.com/in/adrian-clarke-37239218/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <span>QA since 2017. Pedantic since birth.</span>
+    </div>
+
+    <button type="button" class="btn btn-ghost theme-toggle" id="theme-toggle">
+      <span class="theme-toggle-dot" aria-hidden="true"></span>
+      <span class="theme-toggle-label">Dark mode</span>
     </button>
   </div>
-</nav>
+</aside>

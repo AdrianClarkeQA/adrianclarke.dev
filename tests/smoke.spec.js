@@ -1,13 +1,17 @@
 const { test, expect } = require('@playwright/test');
+const { site } = require('./fixtures/test-data');
 
 test.describe('frontend smoke checks', () => {
-  const contentPages = ['/', '/pages/about-me.html', '/pages/cv.html', '/calculator/billions.html'];
+  const contentPages = ['/', '/pages/about-me.html', '/pages/cv.html', '/pages/curriculum-vitae.html', '/calculator/billions.html'];
 
-  test('home page renders core hero and injected nav/footer', async ({ page }) => {
+  test('home page renders hero, sidebar and footer', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.locator('h1.hero-title')).toContainText('Adrian');
-    await expect(page.getByRole('link', { name: 'About Me' }).first()).toBeVisible();
+    await expect(page.locator('h1.hero-title')).toContainText('True quality is foundational');
+    await expect(page.locator('.sidebar-name')).toContainText('Adrian');
+    await expect(page.locator('.sidebar-meta')).toContainText(site.location);
+    await expect(page.getByRole('link', { name: 'View CV' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'About me' }).first()).toBeVisible();
     await expect(page.locator('footer')).toBeVisible();
   });
 
@@ -16,14 +20,18 @@ test.describe('frontend smoke checks', () => {
 
     await expect(page.locator('h1.hero-title')).toContainText('About');
     await expect(page.locator('h1.hero-title')).toContainText('Me');
+    await expect(page.getByText("I've helped to build the QA team")).toBeVisible();
     await expect(page.getByText('If you want to get in touch')).toBeVisible();
   });
 
-  test('cv page renders JSON panel and print-friendly link', async ({ page }) => {
+  test('cv page renders JSON panel and toolbar', async ({ page }) => {
     await page.goto('/pages/cv.html');
 
     await expect(page.locator('#json-output')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Print-friendly version' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'JSON', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Readable' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Print / save PDF' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Copy JSON' })).toHaveCount(0);
   });
 
   test('print cv page has print button', async ({ page }) => {
@@ -31,6 +39,7 @@ test.describe('frontend smoke checks', () => {
 
     await expect(page.getByRole('heading', { name: 'Curriculum Vitae' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Print' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Back to cv.json' })).toBeVisible();
   });
 
   test('content pages expose a title and meta description', async ({ page }) => {

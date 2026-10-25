@@ -29,8 +29,7 @@ for (const viewport of viewports) {
 
         await expect(page).toHaveScreenshot(`about-${viewport.name}-${theme}.png`, {
           fullPage: true,
-          animations: 'disabled',
-          mask: [page.locator('#avatar-img')]
+          animations: 'disabled'
         });
       });
     }

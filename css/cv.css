@@ -1,888 +1,265 @@
 /* ═══════════════════════════════════════════════════════
-   CV PAGE
+   cv.css — CV pages (pages/cv.html, pages/curriculum-vitae.html)
+   Loaded after style.css; uses its tokens.
 ═══════════════════════════════════════════════════════ */
 
-/* ── CV hero ── */
-.cv-hero-content {
-  padding: 48px;
-  display: flex;
-  flex-direction: column;
-}
+/* ── PAGE HEAD ───────────────────────────────────── */
+.cv-head { padding-bottom: 32px; }
 
-.cv-eyebrow {
-  font-family: 'Geist', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 20px;
-  animation: fadeUp 0.5s ease both;
-}
-
-/* ── JSON container ── */
-.json-container {
-  background: var(--dark);
-  border: 1px solid var(--mid);
-  border-radius: 4px;
-  padding: 1.75rem 2rem;
-  overflow: auto;
-  flex: 1;
-  max-height: 650px;
-  animation: fadeUp 0.5s 0.1s ease both;
-  scrollbar-width: thin;
-  scrollbar-color: var(--mid) transparent;
-}
-
-.json-container::-webkit-scrollbar { width: 6px; height: 6px; }
-.json-container::-webkit-scrollbar-track { background: transparent; }
-.json-container::-webkit-scrollbar-thumb { background: var(--mid); border-radius: 3px; }
-
-/* ── JSON pre ── */
-.json-pre {
-  font-family: var(--mono);
-  font-size: 0.76rem;
-  line-height: 1.85;
-  white-space: pre-wrap;
-  color: var(--j-string);
-}
-
-/* ── Syntax token colours ── */
-.j-key     { color: var(--j-key); }
-.j-string  { color: var(--j-string); }
-.j-number  { color: var(--j-number); }
-.j-bool    { color: var(--j-bool); }
-.j-null    { color: var(--j-null); font-style: italic; }
-
-/* ── CV download row ── */
-.cv-footer {
-  margin-top: 16px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
-  animation: fadeUp 0.5s 0.25s ease both;
-}
-
-.cv-print-group,
-.cv-print-note,
-.cv-print-note-body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cv-print-group {
-  gap: 6px;
-}
-
-.cv-print-note {
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--muted);
-  line-height: 1.35;
-  letter-spacing: 0.01em;
-  gap: 8px;
-}
-
-.cv-print-note-title {
-  font: inherit;
-}
-
-.cv-print-note-body {
-  font: inherit;
-  gap: 10px;
-}
-
-.cv-print-note-line,
-.cv-print-note-signoff {
-  display: block;
-}
-
-.cv-footer .btn-primary {
-  font-size: 0.8rem;
-  padding: 12px 22px;
-}
-
-.cv-footer .btn-ghost {
-  white-space: nowrap;
-}
-
-/* ── CV modal document ── */
-body.has-open-modal {
-  overflow: hidden;
-}
-
-.cv-modal[hidden] {
-  display: none;
-}
-
-.cv-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1200;
-  display: grid;
-  place-items: center;
-  padding: 28px;
-}
-
-.cv-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(26, 23, 20, 0.66);
-}
-
-.cv-modal-dialog {
-  position: relative;
-  width: min(980px, 100%);
-  max-height: calc(100vh - 56px);
-  background: #fffdf9;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
-  display: flex;
-  flex-direction: column;
-}
-
-.cv-modal-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border);
-  background: #f7f2eb;
-}
-
-.cv-modal-title,
-.cv-print-title {
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--mid);
-}
-
-.cv-modal-actions,
-.cv-print-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.cv-modal-print,
-.cv-modal-close,
-.cv-print-button {
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: transparent;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-.cv-modal-print,
-.cv-modal-close {
-  font-size: 0.875rem;
-}
-
-.cv-modal-print:hover,
-.cv-modal-close:hover,
-.cv-print-button:hover {
-  border-color: var(--muted);
-  color: var(--dark);
-}
-
-.cv-modal-content {
-  overflow: auto;
-  padding: 24px;
-  background: #f3eee7;
-}
-
-.cv-doc {
-  width: min(860px, 100%);
-  margin: 0 auto;
-  background: #fff;
-  border: 1px solid #ddd3c7;
-  padding: 34px;
-}
-
-.cv-doc-header {
-  display: grid;
-  grid-template-columns: 1fr 108px;
-  gap: 20px;
-  align-items: end;
-  background: var(--orange);
-  border-bottom: 2px solid #d03e0c;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.cv-doc-header-main {
-  min-width: 0;
-}
-
-.cv-doc-header-avatar {
-  width: 108px;
-  height: 108px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-}
-
-.cv-doc-header-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.cv-doc-header h1 {
-  font-family: 'Barlow', sans-serif;
-  font-size: 2.15rem;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-}
-
-.cv-doc-role {
-  margin-top: 6px;
-  font-size: 1rem;
-  color: #ffffff;
-}
-
-.cv-doc-meta {
-  margin-top: 12px;
+.cv-head-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 16px;
-  list-style: none;
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.cv-doc-meta a {
-  color: #ffffff;
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
-}
-
-.cv-doc-grid {
-  display: grid;
-  grid-template-columns: 270px 1fr;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: 24px;
 }
 
-.cv-doc-sidebar {
-  border-right: 1px solid #efe6da;
-  padding-right: 18px;
+/* "cv.json" keeps its lowercase */
+.hero-title.cv-title { text-transform: none; }
+
+.cv-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
-.cv-doc-main {
-  padding-left: 4px;
+.cv-status {
+  padding: 40px 0;
+  color: var(--color-neutral-700);
 }
 
-.cv-doc-section {
-  margin-bottom: 18px;
+/* ── TERMINAL (JSON VIEW) ────────────────────────── */
+.terminal {
+  background: var(--term-bg);
+  color: var(--term-key);
+  border: 1px solid var(--term-bar);
+  margin-bottom: 56px;
 }
 
-.cv-doc-section h3 {
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+.terminal-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--term-bar);
+  font-size: 12px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #5e5449;
-  margin-bottom: 9px;
+  color: var(--term-meta);
 }
-
-.cv-doc-section p,
-.cv-doc-section li {
-  color: #2f2923;
-  font-size: 0.88rem;
-  line-height: 1.55;
-}
-
-.cv-doc-list {
-  list-style: none;
-  display: grid;
+.terminal-path {
+  display: flex;
+  align-items: center;
   gap: 8px;
 }
-
-.cv-doc-subhead {
-  font-weight: 600;
+.terminal-path::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--color-accent);
 }
 
-.cv-doc-entry {
-  margin-bottom: 14px;
-  break-inside: avoid;
-  page-break-inside: avoid;
+.terminal-body {
+  overflow-x: auto;
+  padding: 18px 0 24px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 25px;
+}
+.terminal-body:focus-visible { outline-offset: -2px; }
+
+.terminal-status {
+  padding: 0 24px;
+  color: var(--term-meta);
 }
 
-.cv-doc-entry h4 {
-  font-family: 'Barlow', sans-serif;
-  font-size: 1rem;
-  line-height: 1.25;
-  color: #17120e;
-}
-
-.cv-doc-company {
-  font-size: 0.88rem;
-  color: #6d645a;
-}
-
-.cv-doc-dates {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #857a6d;
-}
-
-.cv-doc-bullets {
-  margin: 8px 0 0 18px;
-  display: grid;
-  gap: 5px;
-}
-
-.cv-doc-stack {
-  margin-top: 8px;
-}
-
-.cv-doc-loading,
-.cv-doc-error {
-  background: #fff;
-  border: 1px solid #ddd3c7;
-  padding: 16px;
-}
-
-.cv-doc-error .btn-primary {
-  margin-top: 10px;
-}
-
-/* ── PRINTABLE CV PAGE ── */
-.cv-print-section {
-  background: linear-gradient(to right,
-    var(--edge) calc(50% - 570px),
-    #f3eee7 calc(50% - 570px),
-    #f3eee7 calc(50% + 570px),
-    var(--edge) calc(50% + 570px)
-  );
-  padding: 0;
-  min-height: calc(100vh - 64px);
-}
-
-.cv-print-toolbar {
+.json-line {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 48px;
-  background: #f7f2eb;
-  border-bottom: 1px solid var(--border);
-  max-width: 1140px;
-  margin: 0 auto;
+  white-space: pre;
+}
+.json-line:hover { background: var(--term-hover); }
+.json-line.is-foldable { cursor: pointer; }
+
+.json-ln {
+  flex: none;
+  width: 56px;
+  padding-right: 14px;
+  text-align: right;
+  color: var(--term-ln);
+  user-select: none;
 }
 
-.cv-print-title { margin: 0; }
-
-.cv-print-button {
-  font-size: 0.875rem;
-  transition: border-color 0.2s, color 0.2s;
+.json-mark {
+  flex: none;
+  width: 22px;
+  text-align: center;
+  user-select: none;
 }
 
-.cv-print-container {
-  width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 48px 48px;
+.json-fold-btn {
+  width: 22px;
+  height: 25px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--term-num);
+  cursor: pointer;
+}
+.json-fold-btn:focus-visible { outline-offset: -2px; }
+
+.json-code { padding-right: 24px; }
+.json-d1 { padding-left: 18px; }
+.json-d2 { padding-left: 36px; }
+.json-d3 { padding-left: 54px; }
+.json-d4 { padding-left: 72px; }
+.json-d5 { padding-left: 90px; }
+.json-d6 { padding-left: 108px; }
+
+.j-key { color: var(--term-key); font-weight: 600; }
+.j-str { color: var(--term-str); }
+.j-num { color: var(--term-num); }
+.j-p   { color: var(--term-p); }
+
+/* ── READABLE CV ─────────────────────────────────── */
+.cv-readable {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding: 32px 0 56px;
+  border-top: 1px solid var(--color-text);
 }
 
-.cv-doc-print {
-  width: 100%;
-  margin: 0 auto;
+.cv-name {
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.cv-subtitle {
+  margin-top: 8px;
+  font-size: 17px;
+}
+.cv-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 14px;
+  font-size: 16px;
+}
+.cv-summary {
+  margin-top: 20px;
+  max-width: 66ch;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--color-neutral-800);
 }
 
-@media (max-width: 900px) {
-  .cv-hero-content {
-    padding: 40px 24px;
-    max-height: none;
-  }
+.cv-section > .section-label { margin-bottom: 8px; }
+.cv-skills { margin-top: 12px; }
 
-  .json-container {
-    max-height: 420px;
-  }
-
-  .cv-modal {
-    padding: 8px;
-  }
-
-  .cv-modal-dialog {
-    width: calc(100% - 16px);
-    max-height: calc(100vh - 32px);
-    border-radius: 6px;
-  }
-
-  .cv-modal-toolbar {
-    padding: 10px 12px;
-    gap: 8px;
-  }
-
-  .cv-modal-title {
-    font-size: 0.8rem;
-  }
-
-  .cv-modal-actions {
-    gap: 6px;
-  }
-
-  .cv-modal-print,
-  .cv-modal-close {
-    padding: 6px 10px;
-    font-size: 0.75rem;
-  }
-
-  .cv-modal-content {
-    padding: 16px;
-  }
-
-  .cv-doc {
-    padding: 14px;
-    margin: 0;
-  }
-
-  .cv-doc-header {
-    grid-template-columns: 1fr 80px;
-    gap: 10px;
-    padding: 12px;
-    align-items: center;
-  }
-
-  .cv-doc-header h1 {
-    font-size: 1.4rem;
-  }
-
-  .cv-doc-header-main {
-    overflow: hidden;
-  }
-
-  .cv-doc-header-avatar {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-  }
-
-  .cv-doc-grid {
-    grid-template-columns: 1fr !important;
-    gap: 18px;
-  }
-
-  .cv-doc-sidebar {
-    border-right: none;
-    border-bottom: 1px solid #efe6da;
-    padding-right: 0;
-    padding-bottom: 12px;
-  }
-
-  .cv-doc-main {
-    padding-left: 0;
-  }
-
-  .cv-doc-section h3 {
-    font-size: 0.8rem;
-  }
-
-  .cv-print-toolbar {
-    padding: 10px 16px;
-    flex-wrap: wrap;
-    max-width: none;
-  }
-
-  .cv-print-title {
-    font-size: 0.8rem;
-    flex: 0 0 100%;
-  }
-
-  .cv-print-actions {
-    gap: 6px;
-    align-self: flex-end;
-  }
-
-  .cv-print-button {
-    padding: 6px 10px;
-    font-size: 0.75rem;
-  }
-
-  .cv-print-container {
-    padding: 16px;
-  }
-
-  .cv-doc-print {
-    padding: 12px;
-  }
+.cv-job {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) minmax(0, 3fr);
+  gap: 8px 28px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--color-divider);
+  break-inside: avoid;
+}
+.cv-period {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--color-neutral-700);
+  font-variant-numeric: tabular-nums;
+}
+.cv-role {
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.cv-company {
+  margin-top: 4px;
+  font-size: 16px;
+  color: var(--color-neutral-800);
+}
+.cv-highlights {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  max-width: 64ch;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.cv-stack {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--color-neutral-700);
 }
 
-@media (max-width: 480px) {
-  .cv-modal {
-    padding: 4px;
-  }
-
-  .cv-modal-dialog {
-    width: calc(100% - 8px);
-  }
-
-  .cv-doc {
-    padding: 10px;
-  }
-
-  .cv-doc-grid {
-    gap: 12px;
-  }
-
-  .cv-doc-header {
-    grid-template-columns: 1fr 70px;
-    gap: 8px;
-    padding: 10px;
-  }
-
-  .cv-doc-header h1 {
-    font-size: 1.15rem;
-  }
-
-  .cv-doc-header-avatar {
-    width: 70px;
-    height: 70px;
-  }
-
-  .cv-modal-content {
-    padding: 10px;
-  }
-
-  .cv-print-container {
-    padding: 12px;
-  }
-
-  .cv-doc-print {
-    padding: 8px;
-  }
-
-  .cv-print-toolbar {
-    padding: 8px 12px;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cv-print-title {
-    font-size: 0.75rem;
-    order: 1;
-  }
-
-  .cv-print-actions {
-    order: 2;
-    justify-content: space-between;
-  }
+.cv-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 20px 32px;
+}
+.cv-skill-name {
+  font-weight: 700;
+  font-size: 16px;
+}
+.cv-skill-tools {
+  margin-top: 2px;
+  font-size: 15px;
+  color: var(--color-neutral-800);
 }
 
-/* Keep CV document paper styling stable in dark mode */
-[data-theme="dark"] .json-container {
-  background: #0f0d0b;
+.cv-extras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 40px;
+}
+.cv-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.cv-entry-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+.cv-entry-meta {
+  margin-top: 4px;
+  font-size: 15px;
+  color: var(--color-neutral-800);
+}
+.cv-language { font-size: 16px; }
+
+/* Narrow: period sits above the role */
+@media (max-width: 599px) {
+  .cv-job { grid-template-columns: minmax(0, 1fr); }
 }
 
-[data-theme="dark"] .cv-modal-content {
-  background: #2b2620;
+/* ── NOTE FROM THE NERD ──────────────────────────── */
+.cv-note {
+  max-width: 66ch;
+  padding-bottom: var(--space-section);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--color-neutral-800);
+}
+.cv-note p + p { margin-top: 10px; }
+.cv-note-signoff {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--color-text);
 }
 
-[data-theme="dark"] .cv-modal-toolbar {
-  background: #211d18;
-}
-
-[data-theme="dark"] .cv-modal-print,
-[data-theme="dark"] .cv-modal-close {
-  border-color: #4c4339;
-}
-
-[data-theme="dark"] .cv-print-toolbar {
-  background: #211d18;
-}
-
-[data-theme="dark"] .cv-print-button {
-  border-color: #4c4339;
-  color: #f0ece6;
-}
-
-[data-theme="dark"] .cv-print-button:hover {
-  border-color: #6a6055;
-  color: #f0ece6;
-}
-
+/* ── PRINT ───────────────────────────────────────── */
 @media print {
-  @page {
-    margin: 0;
-    padding: 0;
-  }
+  /* Printing from the CV page always gives the readable CV */
+  #cv-json-view { display: none !important; }
+  #cv-readable { display: flex !important; }
 
-  body {
-    background: #fff;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Print-safe rendering: prefer local fonts and disable visual effects that can flatten text into vectors/images. */
-  .cv-print-section,
-  .cv-print-section * {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-    filter: none !important;
-    backdrop-filter: none !important;
-    text-shadow: none !important;
-    box-shadow: none !important;
-    mix-blend-mode: normal !important;
-  }
-
-  .cv-doc,
-  .cv-doc-print,
-  .cv-doc * {
-    font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif !important;
-    font-kerning: normal !important;
-    font-variant-ligatures: none !important;
-    -webkit-font-smoothing: auto !important;
-    text-rendering: auto !important;
-  }
-
-  .cv-doc h1,
-  .cv-doc h2,
-  .cv-doc h3,
-  .cv-doc h4,
-  .cv-doc strong,
-  .cv-doc .cv-doc-subhead {
-    font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif !important;
-  }
-
-  .cv-doc-header h1,
-  .cv-doc-role,
-  .cv-doc-meta,
-  .cv-doc-meta a {
-    color: #ffffff !important;
-  }
-
-  #nav-placeholder,
-  .hero,
-  footer,
-  .cv-modal-backdrop,
-  .cv-modal-toolbar,
-  .cv-print-toolbar,
-  .nav,
-  [data-include="/pages/footer.html"],
-  .json-container {
-    display: none !important;
-  }
-
-  .cv-print-section {
-    background: #fff !important;
-    min-height: auto;
-    padding: 0;
-  }
-
-  .cv-print-container {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  .cv-modal {
-    position: static;
-    padding: 0;
-    display: block;
-  }
-
-  .cv-modal[hidden] {
-    display: block;
-  }
-
-  .cv-modal-dialog,
-  .cv-modal-content {
-    width: 100%;
-    max-height: none;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
-    padding: 0;
-    background: #fff !important;
-  }
-
-  .cv-doc,
-  .cv-doc-print {
-    width: 100%;
-    max-height: none;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
-    padding: 16px 20px !important;
-    background: #fff !important;
-    orphans: 4;
-    widows: 4;
-  }
-
-  .cv-doc-header {
-    background: #eb4910 !important;
-    padding: 16px 16px !important;
-    margin-bottom: 12px !important;
-    gap: 14px !important;
-    border-bottom: none !important;
-    grid-template-columns: 1fr 78px !important;
-    align-items: center !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    forced-color-adjust: none !important;
-  }
-
-  .cv-doc-header * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  .cv-doc-header h1 {
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-    margin: 0 !important;
-    line-height: 1.08 !important;
-  }
-
-  .cv-doc-role {
-    margin: 6px 0 0 0 !important;
-    font-size: 0.94rem !important;
-    font-weight: 500 !important;
-    line-height: 1.1 !important;
-  }
-
-  .cv-doc-meta {
-    font-size: 0.8rem !important;
-    gap: 6px 14px !important;
-    margin: 14px 0 0 0 !important;
-    line-height: 1.2 !important;
-  }
-
-  .cv-doc-meta a {
-    text-decoration: none !important;
-  }
-
-  .cv-doc-header-avatar {
-    width: 78px !important;
-    height: 78px !important;
-    border: 1px solid rgba(255, 255, 255, 0.95) !important;
-    border-radius: 8px !important;
-  }
-
-  .cv-doc-grid {
-    display: grid !important;
-    grid-template-columns: 220px 1fr !important;
-    gap: 12px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .cv-doc-sidebar {
-    padding: 0 !important;
-    margin: 0 !important;
-    border-right: 1px solid #efe6da !important;
-    border-bottom: none !important;
-    padding-right: 10px !important;
-  }
-
-  .cv-doc-main {
-    padding: 0 !important;
-    margin: 0 !important;
-    padding-left: 2px !important;
-  }
-
-  .cv-doc-section {
-    break-inside: avoid;
-    page-break-inside: avoid;
-    margin: 0 0 8px 0 !important;
-    orphans: 2;
-    widows: 2;
-  }
-
-  .cv-doc-section h3 {
-    margin: 0 0 5px 0 !important;
-    font-size: 0.78rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.14em !important;
-    text-transform: uppercase !important;
-    color: #5e5449 !important;
-  }
-
-  .cv-doc-section p,
-  .cv-doc-section li {
-    font-size: 0.78rem !important;
-    line-height: 1.35 !important;
-    margin: 0 !important;
-    color: #2f2923 !important;
-  }
-
-  .cv-doc-list {
-    list-style: none !important;
-    display: grid !important;
-    gap: 3px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .cv-doc-entry {
-    margin: 0 0 5px 0 !important;
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .cv-doc-entry h4 {
-    font-family: 'Barlow', sans-serif !important;
-    font-size: 0.88rem !important;
-    margin: 0 !important;
-    line-height: 1.1 !important;
-    color: #17120e !important;
-    font-weight: 600 !important;
-  }
-
-  .cv-doc-company {
-    font-size: 0.77rem !important;
-    margin: 0 !important;
-    color: #6d645a !important;
-  }
-
-  .cv-doc-dates {
-    font-size: 0.7rem !important;
-    margin: 0 !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase !important;
-    color: #857a6d !important;
-  }
-
-  .cv-doc-bullets {
-    margin: 2px 0 0 14px !important;
-    display: grid !important;
-    gap: 2px !important;
-    list-style: disc !important;
-    padding-left: 0 !important;
-  }
-
-  .cv-doc-bullets li {
-    font-size: 0.78rem !important;
-    line-height: 1.3 !important;
-    margin: 0 !important;
-    color: #2f2923 !important;
-  }
-
-  .cv-doc-stack {
-    margin: 2px 0 0 0 !important;
-    font-size: 0.78rem !important;
-    color: #2f2923 !important;
-  }
-
-  .cv-doc-subhead {
-    font-weight: 600 !important;
-    margin: 0 !important;
-  }
+  .cv-readable { padding-bottom: 0; gap: 32px; }
+  a { color: var(--color-text); }
 }
