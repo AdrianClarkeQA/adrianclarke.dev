@@ -130,6 +130,81 @@ a:hover { color: var(--color-accent-700); }
   border: 0;
 }
 
+/* ── BACKGROUND WAVES ────────────────────────────── */
+/* Two soft wave layers anchored top right, fixed behind every page.
+   Each drifts on its own slow loop so they pass each other; layers
+   are oversized (negative inset) so movement never shows an edge.
+   Transform-only animation, so it stays on the compositor (no
+   repaints). The keyframes trace an eased path and are stepped
+   about 14 times a second: both layers step every 0.069s
+   (70s/16/63 and 50/16/45), so their ticks line up. Each step
+   moves under a pixel, so it reads as smooth, but the browser
+   draws about a quarter of the frames a 60fps loop would. If
+   you change a duration, keep duration / 16 / steps equal for
+   both layers. */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -24px -8%;
+  z-index: -1;
+  pointer-events: none;
+  background: right top / max(100%, 1200px) auto no-repeat;
+  will-change: transform;
+}
+body::before {
+  background-image: url("/assets/images/bg-wave-back.svg");
+  animation: wave-wander-back 70s steps(63) infinite;
+}
+body::after {
+  background-image: url("/assets/images/bg-wave-front.svg");
+  animation: wave-wander-front 50s steps(45) infinite;
+}
+html[data-theme="dark"] body::before { background-image: url("/assets/images/bg-wave-back-dark.svg"); }
+html[data-theme="dark"] body::after  { background-image: url("/assets/images/bg-wave-front-dark.svg"); }
+
+@keyframes wave-wander-back {
+  0%, 100% { transform: translate3d(0%, 0px, 0); }
+  6.25%    { transform: translate3d(-0.39%, 1.0px, 0); }
+  12.5%    { transform: translate3d(-1.50%, 4.0px, 0); }
+  18.75%   { transform: translate3d(-2.61%, 7.0px, 0); }
+  25%      { transform: translate3d(-3.00%, 8.0px, 0); }
+  31.25%   { transform: translate3d(-2.42%, 6.2px, 0); }
+  37.5%    { transform: translate3d(-0.75%, 1.0px, 0); }
+  43.75%   { transform: translate3d(0.92%, -4.2px, 0); }
+  50%      { transform: translate3d(1.50%, -6.0px, 0); }
+  56.25%   { transform: translate3d(1.76%, -4.5px, 0); }
+  62.5%    { transform: translate3d(2.50%, 0px, 0); }
+  68.75%   { transform: translate3d(3.24%, 4.5px, 0); }
+  75%      { transform: translate3d(3.50%, 6.0px, 0); }
+  81.25%   { transform: translate3d(3.05%, 5.2px, 0); }
+  87.5%    { transform: translate3d(1.75%, 3.0px, 0); }
+  93.75%   { transform: translate3d(0.45%, 0.8px, 0); }
+}
+@keyframes wave-wander-front {
+  0%, 100% { transform: translate3d(0%, 0px, 0); }
+  6.25%    { transform: translate3d(0.39%, -0.8px, 0); }
+  12.5%    { transform: translate3d(1.50%, -3.0px, 0); }
+  18.75%   { transform: translate3d(2.61%, -5.2px, 0); }
+  25%      { transform: translate3d(3.00%, -6.0px, 0); }
+  31.25%   { transform: translate3d(2.29%, -4.2px, 0); }
+  37.5%    { transform: translate3d(0.25%, 1.0px, 0); }
+  43.75%   { transform: translate3d(-1.79%, 6.2px, 0); }
+  50%      { transform: translate3d(-2.50%, 8.0px, 0); }
+  56.25%   { transform: translate3d(-2.31%, 6.5px, 0); }
+  62.5%    { transform: translate3d(-1.75%, 2.0px, 0); }
+  68.75%   { transform: translate3d(-1.19%, -2.5px, 0); }
+  75%      { transform: translate3d(-1.00%, -4.0px, 0); }
+  81.25%   { transform: translate3d(-0.87%, -3.5px, 0); }
+  87.5%    { transform: translate3d(-0.50%, -2.0px, 0); }
+  93.75%   { transform: translate3d(-0.13%, -0.5px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after { animation: none; }
+}
+
 /* ── SHARED TEXT PATTERNS ────────────────────────── */
 .kicker {
   font-size: 13px;
@@ -736,6 +811,8 @@ html[data-theme="dark"] .theme-toggle-dot { background: transparent; }
   .no-print { display: none !important; }
 
   body { background: #fff; color: var(--color-text); }
+  body::before,
+  body::after { display: none; }
   .layout { display: block; min-height: 0; }
   .main { padding: 0; }
 }
